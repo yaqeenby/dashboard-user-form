@@ -1,0 +1,165 @@
+@use "src/styles/variables" as *;
+@import "primeicons/primeicons.css";
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: $primary-soft;
+  margin: 0;
+}
+
+.primary-bg {
+  background-color: $primary-bg;
+}
+
+.p-card {
+  width: 100%;
+  height: 100%;
+  background-color: $primary-bg !important;
+  color: $text-light !important;
+  font-size: 12px;
+  line-height: 14px;
+  border-radius: 15px;
+}
+
+.p-card-body {
+  padding: 15px !important;
+  height: 100%;
+  justify-content: center;
+}
+
+.p-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-knob-range {
+  stroke: transparent !important;
+  stroke-linecap: round;
+}
+
+.p-knob-text {
+  font-size: 14px !important;
+  font-weight: bold;
+  fill: $primary-tint;
+}
+
+.p-knob-value {
+  stroke: $primary-tint !important;
+  stroke-linecap: round;
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  background-color: transparent;
+  font-size: 14px;
+  color: $text-prim;
+}
+
+.p-datatable-tbody > tr > td {
+  border-color: $borders !important;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+  background-color: #e0f7fa;
+  cursor: pointer;
+}
+
+.p-datatable-tbody > tr > td {
+  padding: 15px;
+}
+
+.p-datatable-thead > tr > th {
+  background-color: $primary-bg !important;
+  color: $text-sec !important;
+  font-size: 14px;
+  border-color: $borders !important;
+}
+
+.p-datatable-header {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin-bottom: 20px;
+}
+
+.table-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: $text-prim;
+}
+
+.table-description {
+  font-size: 14px;
+  color: $text-prim;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.gap-5 {
+  gap: 5px;
+}
+.gap-10 {
+  gap: 10px;
+}
+
+.gap-15 {
+  gap: 15px;
+}
+
+.gap-20 {
+  gap: 20px;
+}
+
+.gap-30 {
+  gap: 30px;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.p-inputtext {
+  background-color: $primary-contrast !important;
+  border-radius: 10px !important;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-color: $primary-contrast !important;
+  color: $text-light !important;
+  font-size: 14px;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.w-100 {
+  width: 100%;
+}
