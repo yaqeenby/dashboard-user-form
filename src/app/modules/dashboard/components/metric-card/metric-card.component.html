@@ -1,0 +1,20 @@
+<p-card class="metric-card">
+  <p-knob
+    *ngIf="showProgress"
+    [(ngModel)]="percentage"
+    [strokeWidth]="5"
+    [readonly]="true"
+    [min]="-50"
+    [max]="50"
+    [step]="1"
+    [valueTemplate]="percentage + '%'"
+  />
+
+  <label class="card-value">
+    <span class="value">{{ value }}</span
+    >{{ total ? "/" + total : "" }}
+  </label>
+  <p class="card-label m-0">
+    {{ title }}
+  </p>
+</p-card>

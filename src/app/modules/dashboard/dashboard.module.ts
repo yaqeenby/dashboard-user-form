@@ -13,9 +13,10 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { MenuModule } from 'primeng/menu';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { MetricCardComponent } from './components/metric-card/metric-card.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, MetricCardComponent],
   imports: [
     RouterModule,
     DashboardRoutingModule,

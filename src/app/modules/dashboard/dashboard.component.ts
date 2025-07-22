@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,25 +6,25 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard.component.scss',
   standalone: false,
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   value = 100;
 
-  cards = [
+  cards: any[] = [
     {
       per: 100,
-      value: 300,
+      value: 390,
       total: 400,
       label: 'Active Trips',
     },
     {
       per: 100,
-      value: 300,
+      value: 200,
       total: 400,
       label: 'Active Trips',
     },
     {
       per: 100,
-      value: 300,
+      value: 340,
       total: 400,
       label: 'Active Trips',
     },
@@ -151,6 +151,18 @@ export class DashboardComponent {
 
   exportColumns = [{ title: 'id', dataKey: 'id' }];
 
+  ngOnInit(): void {
+    var opacity = [1, 0.6, 0.35];
+    var opacityIndex = 0;
+    for (let i = 0; i < this.cards.length; i++) {
+      this.cards[i].opacity = opacity[opacityIndex];
+
+      if (i % 3 == 0) {
+        opacityIndex =
+          opacityIndex + 1 == opacity.length ? 0 : opacityIndex + 1;
+      }
+    }
+  }
   getSeverity(status: number) {
     switch (status) {
       case 1:

@@ -74,6 +74,8 @@ export class ActiveRoutingService {
 
   setActiveRoute(activeRoute: ActiveRouting) {
     this.activeRoute = activeRoute;
+    this.activeRouteIcon =
+      this.routes.find((route) => route.id == activeRoute)?.icon ?? '';
     this.expandMatchingItem(activeRoute);
   }
 
@@ -81,7 +83,7 @@ export class ActiveRoutingService {
     for (let item of this.routes) {
       if (item.items) {
         const match = item.items.find((child) => child.id == activeRoute);
-        this.activeRouteIcon = match?.icon ?? '';
+        this.activeRouteIcon = match?.icon ?? this.activeRouteIcon;
         item.expanded = !!match;
       }
     }

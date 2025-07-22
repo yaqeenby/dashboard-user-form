@@ -1,19 +1,5 @@
 @use "../../../src/styles/variables" as *;
 
-.card-value {
-  color: $text-prim;
-
-  .value {
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-  }
-}
-
-.card-label {
-  text-align: center;
-}
-
 .vehicle-tag {
   border-radius: 6px;
   border: 1px solid $prim-shade-2;
@@ -34,8 +20,28 @@
   font-size: 14px;
 }
 
-::ng-deep .p-inputtext {
-  width: 100%;
+::ng-deep {
+  .p-inputtext {
+    width: 100%;
+    font-size: 14px;
+    color: $text-light;
+  }
+
+  .p-iconfield .p-inputicon:first-child {
+    inset-inline-start: 15px !important;
+    .pi {
+      font-size: 19px;
+    }
+  }
+
+  .p-iconfield .p-inputtext:not(:first-child),
+  .p-iconfield .p-inputwrapper:not(:first-child) .p-inputtext {
+    padding-inline-start: 55px !important;
+  }
+
+  .p-inputicon {
+    top: 47% !important;
+  }
 }
 
 .export-btn {

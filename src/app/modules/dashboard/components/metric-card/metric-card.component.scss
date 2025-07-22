@@ -1,0 +1,69 @@
+@use "../../../../../src/styles/variables" as *;
+
+::ng-deep .metric-card.p-card {
+  width: 100%;
+  height: 100%;
+  background-color: $primary-bg !important;
+  color: $text-light !important;
+  font-size: 12px;
+  line-height: 14px;
+  border-radius: 15px;
+}
+
+.metric-card {
+  .card-value {
+    color: $text-prim;
+    font-size: 12px;
+    line-height: 14px;
+    vertical-align: bottom;
+    color: $text-prim;
+
+    .value {
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+
+  .card-label {
+    text-align: center;
+  }
+
+  ::ng-deep {
+    .p-knob {
+      svg {
+        width: 80px !important;
+        height: 80px !important;
+      }
+    }
+
+    .p-card-body {
+      padding: 15px !important;
+      height: 100%;
+      justify-content: center;
+    }
+
+    .p-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .p-knob-range {
+      stroke: transparent !important;
+      stroke-linecap: round;
+    }
+
+    .p-knob-text {
+      font-size: 18px !important;
+      font-weight: bold;
+      fill: $primary-tint;
+    }
+
+    .p-knob-value {
+      stroke: $primary-tint !important;
+      stroke-linecap: round;
+    }
+  }
+}

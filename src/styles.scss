@@ -11,46 +11,6 @@ body {
   background-color: $primary-bg;
 }
 
-.p-card {
-  width: 100%;
-  height: 100%;
-  background-color: $primary-bg !important;
-  color: $text-light !important;
-  font-size: 12px;
-  line-height: 14px;
-  border-radius: 15px;
-}
-
-.p-card-body {
-  padding: 15px !important;
-  height: 100%;
-  justify-content: center;
-}
-
-.p-card-content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  justify-content: center;
-}
-
-.p-knob-range {
-  stroke: transparent !important;
-  stroke-linecap: round;
-}
-
-.p-knob-text {
-  font-size: 14px !important;
-  font-weight: bold;
-  fill: $primary-tint;
-}
-
-.p-knob-value {
-  stroke: $primary-tint !important;
-  stroke-linecap: round;
-}
-
 .p-datatable .p-datatable-tbody > tr {
   background-color: transparent;
   font-size: 14px;

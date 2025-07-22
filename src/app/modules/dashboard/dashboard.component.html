@@ -6,34 +6,24 @@
       gap: 20px;
     "
   >
-    <p-card *ngFor="let card of cards">
-      <p-knob
-        *ngIf="card.per"
-        [(ngModel)]="card.per"
-        [strokeWidth]="5"
-        [readonly]="true"
-        [min]="-50"
-        [max]="50"
-        [step]="1"
-        [valueTemplate]="card.per + '%'"
-      />
-      <label class="card-value">
-        <span class="value">{{ card.value }}</span
-        >{{ card.total ? "/" + card.total : "" }}
-      </label>
-      <p class="card-label m-0">
-        {{ card.label }}
-      </p>
-    </p-card>
+    <ng-container *ngFor="let card of cards">
+      <app-metric-card
+        [title]="card.label"
+        [value]="card.value"
+        [total]="card.total"
+        [showProgress]="!!(card.value && card.total)"
+        [opacity]="card.opacity"
+      ></app-metric-card>
+    </ng-container>
   </div>
 
   <div class="d-flex flex-column gap-20">
-    <div class="d-flex gap-10">
+    <div class="d-flex gap-15">
       <p-iconfield iconPosition="left" class="flex-grow-1">
         <p-inputicon>
           <i class="pi pi-search"></i>
         </p-inputicon>
-        <input pInputText type="text" placeholder="Global Search" />
+        <input pInputText type="text" placeholder="Search" />
       </p-iconfield>
       <!-- [value]="dt1.filters['global']?.value"
       (input)="dt1.filterGlobal($event.target.value, 'contains')" -->
