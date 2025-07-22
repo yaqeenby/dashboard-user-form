@@ -1,55 +1,21 @@
 @use "../../../src/styles/variables" as *;
+@use "sass:color";
 
-.vehicle-tag {
-  border-radius: 6px;
-  border: 1px solid $prim-shade-2;
-  padding: 0 4px;
-  color: $prim-shade-2;
-  font-size: 13px;
-}
-
-.bolt {
-  box-shadow: 0 0 10px 0 $success;
-}
-
-::ng-deep .p-button-outlined.p-button-contrast {
-  flex-direction: row-reverse;
-  padding: 5px;
-  color: $text-prim;
-  border: 1px solid $prim-shade;
-  font-size: 14px;
-}
-
-::ng-deep {
-  .p-inputtext {
+.tables-container {
+  .divider {
+    border: none;
+    height: 1px;
     width: 100%;
-    font-size: 14px;
-    color: $text-light;
+    background: #000;
+    margin: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      $borders,
+      $borders 4px,
+      transparent 4px,
+      transparent 12px
+    );
   }
 
-  .p-iconfield .p-inputicon:first-child {
-    inset-inline-start: 15px !important;
-    .pi {
-      font-size: 19px;
-    }
-  }
-
-  .p-iconfield .p-inputtext:not(:first-child),
-  .p-iconfield .p-inputwrapper:not(:first-child) .p-inputtext {
-    padding-inline-start: 55px !important;
-  }
-
-  .p-inputicon {
-    top: 47% !important;
-  }
-}
-
-.export-btn {
-  ::ng-deep .p-button {
-    background-color: $btn-prim-bkg;
-    border-color: $btn-prim-bkg;
-    box-shadow: 0 1px 1px 0 #02001799;
-    color: $text-prim;
-    font-size: 14px;
-  }
+  gap: 60px;
 }

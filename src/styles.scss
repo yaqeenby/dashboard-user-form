@@ -11,50 +11,6 @@ body {
   background-color: $primary-bg;
 }
 
-.p-datatable .p-datatable-tbody > tr {
-  background-color: transparent;
-  font-size: 14px;
-  color: $text-prim;
-}
-
-.p-datatable-tbody > tr > td {
-  border-color: $borders !important;
-}
-
-::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
-  background-color: #e0f7fa;
-  cursor: pointer;
-}
-
-.p-datatable-tbody > tr > td {
-  padding: 15px;
-}
-
-.p-datatable-thead > tr > th {
-  background-color: $primary-bg !important;
-  color: $text-sec !important;
-  font-size: 14px;
-  border-color: $borders !important;
-}
-
-.p-datatable-header {
-  background-color: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-  margin-bottom: 20px;
-}
-
-.table-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: $text-prim;
-}
-
-.table-description {
-  font-size: 14px;
-  color: $text-prim;
-}
-
 .d-flex {
   display: flex;
 }
@@ -90,12 +46,20 @@ body {
   align-items: center;
 }
 
+.align-items-end {
+  align-items: end;
+}
+
 .justify-content-center {
   justify-content: center;
 }
 
 .justify-content-between {
   justify-content: space-between;
+}
+
+.justify-content-end {
+  justify-content: end;
 }
 
 .flex-grow-1 {
@@ -122,4 +86,137 @@ body {
 
 .w-100 {
   width: 100%;
+}
+
+.table {
+  .p-datatable .p-datatable-tbody > tr {
+    background-color: transparent;
+    font-size: 14px;
+    color: $text-prim;
+  }
+
+  .p-datatable-tbody > tr > td {
+    border-color: $borders !important;
+  }
+
+  ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+    background-color: #e0f7fa;
+    cursor: pointer;
+  }
+
+  .p-datatable-tbody > tr > td {
+    padding: 15px;
+  }
+
+  .p-datatable-thead > tr > th {
+    background-color: $primary-bg !important;
+    color: $text-sec !important;
+    font-size: 14px;
+    border-color: $borders !important;
+  }
+
+  .p-datatable-header {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin-bottom: 20px;
+  }
+
+  .table-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: $text-prim;
+  }
+
+  .table-description {
+    font-size: 14px;
+    color: $text-prim;
+  }
+
+  .p-inputtext {
+    width: 100%;
+    font-size: 14px;
+    color: $text-light;
+  }
+
+  .p-iconfield .p-inputicon:first-child {
+    inset-inline-start: 15px !important;
+    .pi {
+      font-size: 19px;
+    }
+  }
+
+  .p-iconfield .p-inputtext:not(:first-child),
+  .p-iconfield .p-inputwrapper:not(:first-child) .p-inputtext {
+    padding-inline-start: 55px !important;
+  }
+
+  .p-inputicon {
+    top: 47% !important;
+  }
+
+  .export-btn,
+  .import-btn {
+    .p-button {
+      background-color: $btn-prim-bkg !important;
+      border-color: $btn-prim-bkg !important;
+      box-shadow: 0 1px 1px 0 #02001799;
+      color: $text-prim;
+      font-size: 14px;
+      padding-right: 16px;
+      padding-left: 0;
+      gap: 0;
+
+      .pi {
+        width: 40px;
+        font-size: 12px !important;
+      }
+
+      plusicon {
+        width: 40px;
+
+        svg {
+          font-size: 12px !important;
+        }
+      }
+
+      &:hover {
+        background-color: $primary-contrast !important;
+      }
+    }
+  }
+
+  .p-button-outlined.p-button-contrast {
+    flex-direction: row-reverse;
+    padding: 5px;
+    color: $text-prim;
+    border: 1px solid $prim-shade;
+    font-size: 14px;
+  }
+
+  .columns-plus {
+    background-color: $btn-prim-bkg;
+    box-shadow: 0 1px 1px 0 #02001799;
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  p-sorticon {
+    sortalticon,
+    sortamountdownicon,
+    sortamountupalticon {
+      width: 25px;
+      svg {
+        height: 12px;
+
+        path {
+          fill: $borders;
+        }
+      }
+    }
+  }
 }

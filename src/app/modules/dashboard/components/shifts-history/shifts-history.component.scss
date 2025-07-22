@@ -1,0 +1,13 @@
+@use "../../../../../src/styles/variables" as *;
+
+.vehicle-tag {
+  border-radius: 6px;
+  border: 1px solid $prim-shade-2;
+  padding: 0 4px;
+  color: $prim-shade-2;
+  font-size: 13px;
+}
+
+.bolt {
+  box-shadow: 0 0 10px 0 $success;
+}

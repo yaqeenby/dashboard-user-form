@@ -1,38 +1,19 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
-import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
 import { KnobModule } from 'primeng/knob';
 import { CardModule } from 'primeng/card';
-import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
-import { Tag } from 'primeng/tag';
-import { InputTextModule } from 'primeng/inputtext';
-import { IconField } from 'primeng/iconfield';
-import { InputIcon } from 'primeng/inputicon';
-import { MenuModule } from 'primeng/menu';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { MetricCardComponent } from './components/metric-card/metric-card.component';
+import { SharedModule } from '../shared/shared.module';
+import { ShiftsHistoryComponent } from './components/shifts-history/shifts-history.component';
 
 @NgModule({
-  declarations: [DashboardComponent, MetricCardComponent],
-  imports: [
-    RouterModule,
-    DashboardRoutingModule,
-    RouterModule,
-    FormsModule,
-    ButtonModule,
-    KnobModule,
-    CardModule,
-    CommonModule,
-    TableModule,
-    Tag,
-    InputTextModule,
-    IconField,
-    InputIcon,
-    MenuModule,
+  declarations: [
+    DashboardComponent,
+    MetricCardComponent,
+    ShiftsHistoryComponent,
   ],
+  imports: [DashboardRoutingModule, KnobModule, CardModule, SharedModule],
   bootstrap: [DashboardComponent],
 })
 export class DashboardModule {}

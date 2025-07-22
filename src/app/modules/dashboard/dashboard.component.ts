@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
   products = [
     {
       id: 1,
-      vehicle: 'Bus-9265',
+      vehicle: 'ABus-9265',
       plateNum: '04321',
       odometer: '55,956 KM',
       GPS: '3-Nov-2024 13:05:50',
@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
     {
       id: 2,
       vehicle: 'Bus-9265',
-      plateNum: '04321',
+      plateNum: '104321',
       odometer: '55,956 KM',
       GPS: '3-Nov-2024 13:05:50',
       device: {
@@ -98,8 +98,8 @@ export class DashboardComponent implements OnInit {
     {
       id: 3,
 
-      vehicle: 'Bus-9265',
-      plateNum: '04321',
+      vehicle: 'CBus-9265',
+      plateNum: '204321',
       odometer: '55,956 KM',
       GPS: '3-Nov-2024 13:05:50',
       device: {
