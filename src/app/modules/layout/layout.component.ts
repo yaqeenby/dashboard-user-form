@@ -26,7 +26,11 @@ export class LayoutComponent implements OnInit {
     public activeRoutingService: ActiveRoutingService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activeRoutingService.activeRouteChanged.subscribe((res) => {
+      if (this.showMobileSidebar) this.toggleMobileSidebar();
+    });
+  }
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;

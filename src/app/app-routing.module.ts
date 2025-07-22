@@ -1,5 +1,8 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './modules/layout/layout.component';
+import { ReportComponent } from './modules/report/report.component';
+import { ActiveRouteGuard } from './guards/active-route.guard';
+import { ActiveRouting } from './enums/active-routing.enum';
 
 export const routes: Routes = [
   {
@@ -21,11 +24,14 @@ export const routes: Routes = [
             (m) => m.OrganizationModule
           ),
       },
-      // {
-      //   path: 'reports',
-      //   loadChildren: () =>
-      //     import('./reports/reports.module').then((m) => m.ReportsModule),
-      // },
+      {
+        path: 'report',
+        component: ReportComponent,
+        canMatch: [ActiveRouteGuard],
+        data: { activeRoute: ActiveRouting.Report },
+        // loadChildren: () =>
+        //   import('./reports/reports.module').then((m) => m.ReportsModule),
+      },
     ],
   },
 ];

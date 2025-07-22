@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActiveRouting } from '../enums/active-routing.enum';
 import { MenuItem } from 'primeng/api';
@@ -7,6 +7,7 @@ import { MenuItem } from 'primeng/api';
   providedIn: 'root',
 })
 export class ActiveRoutingService {
+  activeRouteChanged: EventEmitter<any> = new EventEmitter<any>();
   activeRoute: ActiveRouting = ActiveRouting.Dashboard;
   activeRouteIcon: string = 'assets/icons/dashboard.svg';
 
@@ -17,6 +18,7 @@ export class ActiveRoutingService {
       icon: 'assets/icons/dashboard.svg',
       command: () => {
         this.activeRoute = ActiveRouting.Dashboard;
+        this.activeRouteChanged.emit(this.activeRoute);
         this.router.navigate(['/dashboard']);
       },
       items: [],
@@ -25,7 +27,11 @@ export class ActiveRoutingService {
       id: ActiveRouting.Report,
       label: 'Report',
       icon: 'assets/icons/reports.svg',
-      command: () => (this.activeRoute = ActiveRouting.Report),
+      command: () => {
+        this.activeRoute = ActiveRouting.Report;
+        this.activeRouteChanged.emit(this.activeRoute);
+        this.router.navigate(['/report']);
+      },
       items: [],
     },
     {
@@ -39,16 +45,24 @@ export class ActiveRoutingService {
           label: 'Invoice',
           icon: 'assets/icons/invoice.svg',
           isChild: true,
-          command: () => (this.activeRoute = ActiveRouting.Invoice),
+          command: () => {
+            this.activeRoute = ActiveRouting.Invoice;
+            this.activeRouteChanged.emit(this.activeRoute);
+            this.router.navigate(['/organization/invoice']);
+          },
         },
         {
           id: ActiveRouting.Users,
           label: 'Users',
           icon: 'assets/icons/users.svg',
-          command: () => (this.activeRoute = ActiveRouting.Users),
+          command: () => {
+            {
+              this.activeRoute = ActiveRouting.Users;
+            }
+          },
           isChild: true,
           action: {
-            icon: '../assets/icons/plus.svg',
+            icon: 'assets/icons/plus.svg',
             link: 'organization/users/add',
           },
         },
@@ -60,8 +74,6 @@ export class ActiveRoutingService {
 
   setActiveRoute(activeRoute: ActiveRouting) {
     this.activeRoute = activeRoute;
-    this.activeRouteIcon =
-      this.routes.find((it) => it.id == activeRoute)?.icon ?? '';
     this.expandMatchingItem(activeRoute);
   }
 
@@ -69,6 +81,7 @@ export class ActiveRoutingService {
     for (let item of this.routes) {
       if (item.items) {
         const match = item.items.find((child) => child.id == activeRoute);
+        this.activeRouteIcon = match?.icon ?? '';
         item.expanded = !!match;
       }
     }

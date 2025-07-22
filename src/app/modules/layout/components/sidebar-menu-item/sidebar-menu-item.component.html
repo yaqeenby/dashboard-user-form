@@ -19,6 +19,7 @@
     "
     [routerLink]="item['action'].link"
     class="ml-auto item-action"
+    (click)="activeRoutingService.activeRouteChanged.emit(item)"
   >
     <img [src]="item['action'].icon" width="18" height="18" />
     {{ item["action"].name }}
