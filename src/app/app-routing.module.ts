@@ -1,6 +1,5 @@
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { LayoutComponent } from './modules/layout/layout.component';
-import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
   {
@@ -8,15 +7,19 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      // {
-      //   path: 'dashboard',
-      //   loadChildren: () =>
-      //     import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
-      // },
       {
-        path: 'users',
+        path: 'dashboard',
         loadChildren: () =>
-          import('./modules/users/users.module').then((m) => m.UsersModule),
+          import('./modules/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
+      },
+      {
+        path: 'organization',
+        loadChildren: () =>
+          import('./modules/organization/organization.module').then(
+            (m) => m.OrganizationModule
+          ),
       },
       // {
       //   path: 'reports',

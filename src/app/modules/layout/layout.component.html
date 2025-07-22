@@ -1,84 +1,45 @@
 <div class="layout">
   <!-- Desktop Sidebar -->
   <aside class="sidebar" [class.collapsed]="isCollapsed">
-    <div class="logo-img d-flex align-items-center justify-content-center">
-      <img
-        class="full-logo"
-        src="../assets/logos/full-logo.png"
-        *ngIf="!isCollapsed"
-      />
-      <img class="logo" src="../assets/logos/logo.png" *ngIf="isCollapsed" />
-    </div>
+    <div class="d-flex flex-column gap-10">
+      <div class="logo-img d-flex align-items-center justify-content-center">
+        <img
+          class="full-logo"
+          src="../assets/logos/full-logo.png"
+          *ngIf="!isCollapsed"
+        />
+        <img class="logo" src="../assets/logos/logo.png" *ngIf="isCollapsed" />
+      </div>
 
-    <div class="toggle-btn">
-      <button pButton icon="pi pi-list" (click)="toggleSidebar()"></button>
+      <div class="toggle-btn">
+        <button pButton icon="pi pi-list" (click)="toggleSidebar()"></button>
+      </div>
     </div>
 
     <div class="menu-container">
       <ng-container *ngIf="!isCollapsed; else tieredmenu">
-        <p-panelmenu class="menu" [model]="itemsn" class="w-full md:w-80">
+        <p-panelmenu
+          class="menu"
+          [model]="activeRoutingService.routes"
+          class="w-full md:w-80"
+        >
           <ng-template #item let-item>
-            <a
-              pRipple
-              class="sidebar-menu-item items-center px-4 py-2 cursor-pointer group {{
-                isActive(item.label) ? 'active' : ''
-              }}"
-            >
-              <span class="icon">
-                <img width="28" height="28" [src]="item.icon" />
-              </span>
-
-              <span class="label">
-                {{ item.label }}
-              </span>
-
-              <span
-                *ngIf="item.action"
-                [routerLink]="item.action.link"
-                class="ml-auto item-action"
-              >
-                <img [src]="item.action.icon" width="18" height="18" />
-                {{ item.action.name }}
-              </span>
-
-              <i
-                *ngIf="item.items && item.items.length > 0"
-                class="ml-auto pi"
-                [ngClass]="{
-                  'pi-angle-down': item.expanded,
-                  'pi-angle-up': !item.expanded
-                }"
-              ></i>
-            </a>
+            <app-sidebar-menu-item
+              variant="big"
+              [item]="item"
+              [selected]="isActive(item.id)"
+            ></app-sidebar-menu-item>
           </ng-template>
         </p-panelmenu>
       </ng-container>
       <ng-template #tieredmenu>
-        <p-tieredmenu class="menu" [model]="itemsn">
+        <p-tieredmenu class="menu" [model]="activeRoutingService.routes">
           <ng-template #item let-item>
-            <a
-              pRipple
-              class="sidebar-menu-item items-center px-4 py-2 cursor-pointer group {{
-                isActive(item.label) ? 'active' : ''
-              }}"
-            >
-              <span class="icon">
-                <img width="28" height="28" [src]="item.icon" />
-              </span>
-
-              <ng-container *ngIf="!isCollapsed">
-                <span class="label">
-                  {{ item.label }}
-                </span>
-                <!-- <p-badge *ngIf="item.badge" class="ml-auto" [value]="item.badge" /> -->
-                <!-- <span
-                *ngIf="item.shortcut"
-                class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1"
-              >
-                {{ item.shortcut }}
-              </span> -->
-              </ng-container>
-            </a>
+            <app-sidebar-menu-item
+              variant="small"
+              [item]="item"
+              [selected]="isActive(item.id)"
+            ></app-sidebar-menu-item>
           </ng-template>
         </p-tieredmenu>
       </ng-template>
@@ -99,27 +60,94 @@
   </aside>
 
   <!-- Mobile Overlay Sidebar -->
-  <div class="mobile-header">
-    <button
-      pButton
-      icon="pi pi-bars"
-      class="p-button-text"
-      (click)="toggleMobileSidebar()"
-    ></button>
+  <div
+    class="mobile-header d-flex align-items-center gap-30"
+    (click)="toggleMobileSidebar()"
+  >
+    <img class="logo" src="../assets/logos/logo.png" />
+
+    <app-sidebar-menu-item
+      variant="shortcut"
+      [item]="{
+        id: activeRoutingService.activeRoute,
+        label: activeRoutingService.activeRoute,
+        icon: activeRoutingService.activeRouteIcon
+      }"
+      [selected]="true"
+    ></app-sidebar-menu-item>
+
+    <div class="user d-flex flex-row ml-auto">
+      <img
+        src="../assets/images/dummy-user-img.png"
+        class="user-img"
+        width="40"
+        height="40"
+      />
+    </div>
+    <button pButton icon="pi pi-bars" class="p-button-text"></button>
   </div>
-  <div class="mobile-sidebar" *ngIf="showMobileSidebar">
-    <div class="overlay" (click)="toggleMobileSidebar()"></div>
-    <aside class="sidebar">
-      <ul class="menu">
-        <li><i class="pi pi-home"></i> Dashboard</li>
-        <li><i class="pi pi-user"></i> Users</li>
-        <li><i class="pi pi-cog"></i> Settings</li>
-      </ul>
-    </aside>
-  </div>
+
+  <div
+    class="overlay"
+    *ngIf="showMobileSidebar"
+    (click)="toggleMobileSidebar()"
+  ></div>
+
+  <!-- Top Sidebar -->
+  <aside class="top-sidebar" [class.open]="showMobileSidebar">
+    <div class="logo-img d-flex align-items-center justify-content-between">
+      <img class="logo" src="../assets/logos/logo.png" />
+
+      <div class="close-btn">
+        <button
+          pButton
+          icon="pi pi-times"
+          (click)="toggleMobileSidebar()"
+        ></button>
+      </div>
+    </div>
+
+    <div class="menu-container">
+      <p-panelmenu
+        class="menu"
+        [model]="activeRoutingService.routes"
+        class="w-full md:w-80"
+      >
+        <ng-template #item let-item>
+          <app-sidebar-menu-item
+            variant="mobile"
+            [item]="item"
+            [selected]="isActive(item.id)"
+          ></app-sidebar-menu-item>
+        </ng-template>
+      </p-panelmenu>
+    </div>
+
+    <div class="user d-flex flex-row">
+      <img
+        src="../assets/images/dummy-user-img.png"
+        class="user-img"
+        width="40"
+        height="40"
+      />
+      <div class="d-flex flex-column">
+        <label class="user-name">John Doe</label>
+        <label class="user-role">Admin</label>
+      </div>
+    </div>
+  </aside>
 
   <!-- Main Content -->
   <main class="content" [class.collapsed]="isCollapsed">
     <router-outlet></router-outlet>
   </main>
 </div>
+
+<!-- 
+//user profile 
+image same on all just remove text and parent style
+
+div with padding x and gap 15
+
+
+................................... -->

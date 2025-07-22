@@ -12,8 +12,9 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { SelectModule } from 'primeng/select';
 import { InputMaskModule } from 'primeng/inputmask';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Fluid } from 'primeng/fluid';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [UsersComponent, AddUserComponent],
@@ -21,6 +22,7 @@ import { Fluid } from 'primeng/fluid';
     RouterModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     UsersRoutingModule,
     FileUpload,
     ToggleSwitchModule,
@@ -30,6 +32,7 @@ import { Fluid } from 'primeng/fluid';
     SelectModule,
     InputMaskModule,
     Fluid,
+    ButtonModule,
   ],
   providers: [MessageService],
   bootstrap: [UsersComponent],

@@ -1,98 +1,185 @@
-@use '../../../src/styles/variables' as *;
+@use "../../../src/styles/variables" as *;
 
 .layout {
   display: flex;
   height: 100vh;
 
-  .sidebar {
-    width: 250px;
-    background-color: $primary-bg-deep;
-    color: #fff;
-    transition: width 0.3s ease;
+  .menu-container {
     display: flex;
     flex-direction: column;
-    padding: 30px 0;
-    gap: 10px;
+    flex-grow: 1;
+    padding-top: 20px;
 
-    &.collapsed {
-      width: 70px;
-      .menu-container {
-        justify-content: center;
+    ::ng-deep {
+      .p-panelmenu-panel {
+        background-color: transparent !important;
+        border: none !important;
+        padding: 2px 10px !important;
+        border-radius: 4px !important;
       }
-    }
 
-    .menu-container {
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
+      .p-panelmenu-header-content:hover {
+        background-color: transparent !important;
+      }
 
-    .menu {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+      .p-panelmenu-header:not(.p-disabled) .p-panelmenu-header-content:hover {
+        background: $primary-bg !important;
+      }
+      .p-panelmenu-item:not(.p-disabled) > .p-panelmenu-item-content:hover {
+        background: $primary-bg !important;
+      }
 
-      li {
-        padding: 15px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        cursor: pointer;
+      .p-panelmenu-submenu {
+        border-radius: 8px !important;
+        padding: 2px 10px !important;
+        padding-left: 35px !important;
+      }
 
-        &:hover {
-          background-color: #2a2a3b;
-        }
+      .p-tieredmenu {
+        min-width: unset !important;
+        background: transparent !important;
+        border: none !important;
+      }
+      .p-tieredmenu-item:not(.p-disabled) > .p-tieredmenu-item-content:hover {
+        background: transparent !important;
+      }
+      .p-tieredmenu-item-active > .p-tieredmenu-item-content {
+        background: transparent !important;
+      }
+
+      .p-tieredmenu-submenu {
+        background: $primary-bg-deep !important;
+        border: none !important;
+      }
+
+      .p-panelmenu-item.p-focus > .p-panelmenu-item-content {
+        background: transparent !important;
+      }
+
+      .p-tieredmenu-item.p-focus > .p-tieredmenu-item-content {
+        background: transparent !important;
+      }
+      .p-tieredmenu-item:not(.p-tieredmenu-item-active):hover {
+        background-color: $primary-bg !important;
       }
     }
   }
 
-  .content {
-    flex: 1;
-    padding: 20px;
-    transition: margin-left 0.3s ease;
-    overflow: hidden;
-    overflow-y: auto;
+  .sidebar {
+    width: 304px;
+    background-color: $primary-bg-deep;
+    transition: width 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 0;
+    box-shadow: 16px 0 30px 0 rgb(0, 0, 0, 0.2);
+
+    .toggle-btn {
+      ::ng-deep .p-button-icon-only {
+        width: 100% !important;
+      }
+
+      ::ng-deep .p-button {
+        border-radius: 0;
+        border: none;
+        background-color: $primary-bg;
+        padding: 6px;
+        font-size: 18px;
+      }
+
+      ::ng-deep .p-button:focus-visible {
+        outline: unset !important;
+      }
+    }
+
+    .full-logo {
+      width: 152.64px;
+    }
+
+    .logo {
+      width: 64px;
+    }
 
     &.collapsed {
-      // margin-left: -180px;
+      width: 96px;
+      .menu-container {
+        justify-content: center;
+      }
+      .user {
+        justify-content: center;
+      }
     }
   }
 
   .mobile-header {
     display: none;
-    background: #1e1e2f;
-    padding: 10px;
-
+    background: $primary-bg-deep;
+    padding: 15px;
+    box-shadow: 0 16px 30px 0 rgba(0, 0, 0, 0.3);
+    border-right: 2px solid $primary-bg-deep;
     button {
       color: #fff;
     }
+
+    .logo {
+      width: 64px;
+    }
   }
 
-  .mobile-sidebar {
+  .top-sidebar {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    right: 0;
+    height: 0;
+    overflow: hidden;
+    background: $primary-bg-deep;
+    box-shadow: 0 16px 30px 0 rgba(0, 0, 0, 0.3);
+    transition: height 0.3s ease;
+    z-index: 1001;
+    gap: 30px;
 
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 250px;
-      width: calc(100% - 250px);
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
+    .logo {
+      width: 64px;
     }
 
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 250px;
-      height: 100%;
-      background-color: #1e1e2f;
-      color: white;
-      z-index: 1000;
+    &.open {
+      padding: 25px;
+      border-radius: 15px;
+      height: 500px;
+      max-height: fit-content;
     }
+
+    .sidebar-content {
+      padding: 1rem;
+    }
+
+    ::ng-deep .p-panelmenu {
+      gap: 20px;
+    }
+
+    .close-btn {
+      ::ng-deep .p-button {
+        color: $text-sec;
+        font-size: 16px;
+        background-color: transparent;
+        padding: 0;
+        border: 0;
+      }
+    }
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba($primary-soft, 0.7);
+    z-index: 1000;
   }
 
   @media (max-width: 768px) {
@@ -105,115 +192,7 @@
     .mobile-header {
       display: flex;
     }
-
-    .content {
-      margin-left: 0 !important;
-    }
   }
-}
-
-
-.sidebar-menu-item {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  cursor: pointer;
-
-  .icon {
-   display: inline-flex;
-   align-items: center;
-   justify-content: center;
-   width: 32px;
-   height: 32px;
-   border-radius: 10px;
-   background-color: $btn-nav-prim-bkg;
-  }
-
-  .label {
-   font-size: 13px;
-   color: $btn-nav-prim-text;
-  }
-}
-
-.sidebar-menu-item.active {
-  .icon {
-    background-color: $btn-nav-prim-bkg-click-focus;
-
-    img {
-      filter: brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg); /* black */
-    }
-  }
-
-  .label {
-    font-size: 12px;
-   font-weight: 700;
-  color: $btn-nav-prim-bkg-click-focus;
-  }
-}
-
-::ng-deep .p-panelmenu-panel {
-  background-color: transparent !important;
-  padding: 5px 15px !important;
-  border: none !important;
-}
-
-::ng-deep .p-panelmenu-header-content:hover {
-  background-color: transparent !important;
-}
-
-::ng-deep .p-panelmenu-item:not(.p-disabled) > .p-panelmenu-item-content:hover {
-    background-color: transparent !important;
-}
-
-::ng-deep .p-panelmenu-submenu {
-  padding: 10px 15px !important;
-  padding-right: 0 !important;
-}
-
-::ng-deep .p-panelmenu-submenu .p-panelmenu-item {
-  padding: 5px 15px !important;
-  padding-right: 0 !important;
-}
-
-::ng-deep .p-tieredmenu {
-  background-color: transparent !important;
-  border: none !important;
-  min-width: unset !important;
-}
-
-::ng-deep .p-tieredmenu-root-list, .p-tieredmenu-submenu {
-  align-items: center !important;
-  gap: 20px !important;
-}
-
-::ng-deep .p-tieredmenu-item-active > .p-tieredmenu-item-content {
-  // background-color: $primary-tint !important;
-    background-color: transparent !important;
-
-  //  backdrop-filter: blur(6px);
-}
-
-.toggle-btn {
-::ng-deep .p-button-icon-only {
-      width: 100% !important;
-
-}
-
-::ng-deep .p-button {
-  border-radius: 0;
-  border: none;
-  background-color: $primary-bg;
-  padding: 6px;
-  font-size: 18px;
-}
-}
-
-.full-logo {
-  width: 152.64px;
-}
-
-.logo {
-  width: 64px;
 }
 
 .user {
@@ -223,7 +202,7 @@
   font-size: 14px;
 
   .user-name {
-   font-weight: 700;
+    font-weight: 700;
   }
 
   // .user-role {
@@ -239,11 +218,405 @@
   }
 }
 
-.item-action {
-  border-radius: 8px;
-  padding: 7px;
-  background-color: $primary-tint;
-      display: flex;
-    align-items: center;
-    justify-content: center;
-}
+// .layout {
+//   display: flex;
+//   height: 100vh;
+
+//   .sidebar {
+//     width: 250px;
+//     background-color: $primary-bg-deep;
+//     color: #fff;
+//     transition: width 0.3s ease;
+//     display: flex;
+//     flex-direction: column;
+//     padding: 30px 0;
+//     gap: 10px;
+
+//     &.collapsed {
+//       width: 96px;
+//       .menu-container {
+//         justify-content: center;
+//       }
+//       .user {
+//         justify-content: center;
+//       }
+
+//       .icon.main-route {
+//         width: 48px;
+//         height: 48px;
+//         border-radius: 15px;
+
+//         img {
+//           width: 32px;
+//           height: 32px;
+//         }
+//       }
+//     }
+
+//     .menu-container {
+//       display: flex;
+//       flex-direction: column;
+//       flex-grow: 1;
+//     }
+
+//     .menu {
+//       list-style: none;
+//       padding: 0;
+//       margin: 0;
+
+//       li {
+//         padding: 15px;
+//         display: flex;
+//         align-items: center;
+//         gap: 10px;
+//         cursor: pointer;
+
+//         &:hover {
+//           background-color: #2a2a3b;
+//         }
+//       }
+//     }
+//   }
+
+//   .content {
+//     flex: 1;
+//     padding: 20px;
+//     transition: margin-left 0.3s ease;
+//     overflow: hidden;
+//     overflow-y: auto;
+
+//     &.collapsed {
+//       // margin-left: -180px;
+//     }
+//   }
+
+//   .mobile-header {
+//     display: none;
+//     background: $primary-bg-deep;
+//     padding: 15px;
+//     box-shadow: 0 16px 30px 0 rgba(0, 0, 0, 0.3);
+//     border-right: 2px solid $primary-bg-deep;
+//     button {
+//       color: #fff;
+//     }
+//   }
+
+//   .top-sidebar {
+//     display: flex;
+//     flex-direction: column;
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     height: 0;
+//     overflow: hidden;
+//     background: $primary-bg-deep;
+//     box-shadow: 0 16px 30px 0 rgba(0, 0, 0, 0.3);
+//     transition: height 0.3s ease;
+//     z-index: 1001;
+//     gap: 30px;
+
+//     &.open {
+//       padding: 25px;
+//       border-radius: 15px;
+//       height: 500px;
+//       max-height: fit-content;
+//     }
+
+//     .sidebar-content {
+//       padding: 1rem;
+//     }
+
+//     ::ng-deep .p-panelmenu {
+//       gap: 20px;
+//     }
+
+//     .close-btn {
+//       ::ng-deep .p-button {
+//         color: $text-sec;
+//         font-size: 16px;
+//         background-color: transparent;
+//         padding: 0;
+//         border: 0;
+//       }
+//     }
+//   }
+
+//   .overlay {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     background: rgba($primary-soft, 0.7);
+//     z-index: 1000;
+//   }
+
+//   @media (max-width: 768px) {
+//     flex-direction: column;
+
+//     .sidebar {
+//       display: none;
+//     }
+
+//     .mobile-header {
+//       display: flex;
+//     }
+
+//     .content {
+//       margin-left: 0 !important;
+//     }
+//   }
+// }
+
+// .sidebar-menu-item {
+//   display: flex;
+//   align-items: center;
+//   gap: 20px;
+//   width: 100%;
+
+//   cursor: pointer;
+
+//   .icon {
+//     display: inline-flex;
+//     align-items: center;
+//     justify-content: center;
+//     width: 32px;
+//     height: 32px;
+//     border-radius: 10px;
+//     background-color: $btn-nav-prim-bkg;
+//   }
+
+//   .label {
+//     font-size: 13px;
+//     color: $btn-nav-prim-text;
+//   }
+// }
+
+// .sidebar-menu-item.active {
+//   .icon {
+//     background-color: $btn-nav-prim-bkg-click-focus;
+
+//     img {
+//       filter: brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%)
+//         hue-rotate(0deg); /* black */
+//     }
+//   }
+
+//   .label {
+//     font-size: 12px;
+//     font-weight: 700;
+//     color: $btn-nav-prim-bkg-click-focus;
+//   }
+// }
+
+// ::ng-deep .p-panelmenu-panel {
+//   background-color: transparent !important;
+//   padding: 5px 15px !important;
+//   border: none !important;
+// }
+
+// ::ng-deep .p-panelmenu-header-content:hover {
+//   background-color: transparent !important;
+// }
+
+// ::ng-deep .p-panelmenu-item:not(.p-disabled) > .p-panelmenu-item-content:hover {
+//   background-color: transparent !important;
+// }
+
+// ::ng-deep .p-panelmenu-submenu {
+//   padding: 10px 15px !important;
+//   padding-right: 0 !important;
+// }
+
+// ::ng-deep .p-panelmenu-submenu .p-panelmenu-item {
+//   padding: 5px 15px !important;
+//   padding-right: 0 !important;
+// }
+
+// ::ng-deep .p-tieredmenu {
+//   background-color: transparent !important;
+//   border: none !important;
+//   min-width: unset !important;
+// }
+
+// ::ng-deep .p-tieredmenu-root-list,
+// .p-tieredmenu-submenu {
+//   align-items: center !important;
+//   gap: 20px !important;
+//   padding: 0;
+// }
+
+// .icon-label {
+//   display: none;
+// }
+
+// ::ng-deep .p-tieredmenu-item-active > .p-tieredmenu-item-content {
+//   background-color: transparent !important;
+//   width: 100%;
+//   display: flex;
+//   justify-content: center;
+
+//   .sidebar-menu-item {
+//     position: relative;
+//   }
+
+//   .label {
+//     display: none;
+//   }
+
+//   .icon {
+//     box-shadow: 6 0 10 0 rgba(black, 0.12);
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     backdrop-filter: blur(6px);
+//     width: 334px !important;
+//     height: 69px !important;
+//     margin-left: 20px;
+//     justify-content: start !important;
+//     border-bottom-right-radius: 0 !important;
+//     border: 1px solid $borders;
+//     background: $btn-nav-prim-bkg-click-focus !important;
+
+//     background: linear-gradient(
+//       90deg,
+//       rgba(10, 103, 112, 1) 0%,
+//       #1e222d 25%,
+//       #1e222d 100%
+//     ) !important;
+
+//     z-index: 1;
+//     img {
+//       width: 60px !important;
+//       filter: invert(63%) sepia(77%) saturate(2433%) hue-rotate(151deg)
+//         brightness(97%) contrast(96%);
+//       /* green */
+//     }
+
+//     .icon-label {
+//       display: inline;
+//       margin-left: 25px;
+//       font-size: 16px;
+//       color: $text-prim;
+//       font-weight: 600;
+//     }
+//   }
+// }
+
+// ::ng-deep .p-tieredmenu-item {
+//   width: 100%;
+//   display: flex;
+//   justify-content: center;
+//   padding: 5px !important;
+// }
+
+// ::ng-deep .p-tieredmenu-item:not(.p-tieredmenu-item-active):hover {
+//   background-color: $primary-bg !important;
+// }
+
+// ::ng-deep
+//   .p-tieredmenu-item:not(.p-disabled)
+//   > .p-tieredmenu-item-content:hover {
+//   background: transparent !important;
+// }
+
+// ::ng-deep .p-tieredmenu-item.p-focus > .p-tieredmenu-item-content {
+//   background: transparent !important;
+// }
+
+// ::ng-deep .p-tieredmenu-submenu {
+//   top: 69px !important;
+//   width: 258px !important;
+//   background-color: $primary-bg-deep-shade-2 !important;
+//   border-radius: 15px !important;
+//   border-top-left-radius: 0 !important;
+//   border-top-right-radius: 0 !important;
+//   border-bottom-left-radius: 0 !important;
+//   border: 1px solid $borders !important;
+//   border-top: 0 !important;
+//   padding: 10px 15px !important;
+//   box-shadow: 6 0 10 0 rgba(black, 0.12) !important;
+
+//   .p-tieredmenu-item {
+//     // padding: 7px 0 !important;
+//     justify-content: start !important;
+//     gap: 20px !important;
+//     width: 100% !important;
+
+//     .p-tieredmenu-item-content {
+//       width: 100% !important;
+
+//       .sidebar-menu-item {
+//         flex-direction: row;
+//         gap: 20px !important;
+//       }
+//     }
+//   }
+// }
+
+// .toggle-btn {
+//   ::ng-deep .p-button-icon-only {
+//     width: 100% !important;
+//   }
+
+//   ::ng-deep .p-button {
+//     border-radius: 0;
+//     border: none;
+//     background-color: $primary-bg;
+//     padding: 6px;
+//     font-size: 18px;
+//   }
+
+//   ::ng-deep .p-button:focus-visible {
+//     outline: unset !important;
+//   }
+// }
+
+// .full-logo {
+//   width: 152.64px;
+// }
+
+// .logo {
+//   width: 64px;
+// }
+
+// .user {
+//   gap: 15px;
+//   padding: 0 15px;
+//   color: $text-prim;
+//   font-size: 14px;
+
+//   .user-name {
+//     font-weight: 700;
+//   }
+
+//   // .user-role {
+//   // }
+
+//   .user-img {
+//     width: 40px;
+//     height: 40px;
+//     min-width: 40px;
+//     min-height: 40px;
+//     border: 2px solid $btn-nav-prim-modals;
+//     border-radius: 15px;
+//   }
+// }
+
+// .item-action {
+//   border-radius: 8px;
+//   padding: 7px;
+//   background-color: $primary-tint;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+// .gap-5 {
+//   gap: 5px !important;
+// }
+
+// .fs-12 {
+//   font-size: 12px !important;
+// }

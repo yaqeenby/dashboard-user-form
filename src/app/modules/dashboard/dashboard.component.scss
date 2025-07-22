@@ -1,0 +1,49 @@
+@use "../../../src/styles/variables" as *;
+
+.card-value {
+  color: $text-prim;
+
+  .value {
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+.card-label {
+  text-align: center;
+}
+
+.vehicle-tag {
+  border-radius: 6px;
+  border: 1px solid $prim-shade-2;
+  padding: 0 4px;
+  color: $prim-shade-2;
+  font-size: 13px;
+}
+
+.bolt {
+  box-shadow: 0 0 10px 0 $success;
+}
+
+::ng-deep .p-button-outlined.p-button-contrast {
+  flex-direction: row-reverse;
+  padding: 5px;
+  color: $text-prim;
+  border: 1px solid $prim-shade;
+  font-size: 14px;
+}
+
+::ng-deep .p-inputtext {
+  width: 100%;
+}
+
+.export-btn {
+  ::ng-deep .p-button {
+    background-color: $btn-prim-bkg;
+    border-color: $btn-prim-bkg;
+    box-shadow: 0 1px 1px 0 #02001799;
+    color: $text-prim;
+    font-size: 14px;
+  }
+}

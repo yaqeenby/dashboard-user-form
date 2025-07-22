@@ -1,0 +1,218 @@
+<div class="header d-flex align-items-center justify-content-between">
+  <div class="d-flex align-items-center gap-30">
+    <i class="pi pi-arrow-left"></i>
+    <div class="d-flex flex-column gap-5">
+      <label class="title">Add User</label>
+      <label>Organization</label>
+    </div>
+  </div>
+  <div class="d-flex align-items-center">
+    <p-button
+      label="Cancel"
+      variant="text"
+      icon="pi pi-times"
+      class="cancel-btn"
+      (onClick)="cancel()"
+    />
+    <p-button
+      label="Save"
+      icon="pi pi-check"
+      class="save-btn"
+      (onClick)="submit()"
+    />
+  </div>
+</div>
+
+<div class="d-flex flex-column align-items-center gap-15 form">
+  <img
+    [src]="previewUrl ?? '../../../../assets/images/dummy-user-img.png'"
+    width="200"
+    height="200"
+    class="user-img"
+  />
+
+  <p-fileupload
+    mode="basic"
+    name="demo[]"
+    chooseIcon="pi pi-camera"
+    url="https://www.primefaces.org/cdn/api/upload.php"
+    accept="image/*"
+    maxFileSize="1000000"
+    (onUpload)="onBasicUploadAuto($event)"
+    (onSelect)="onImageSelect($event)"
+    [auto]="true"
+    chooseLabel="Upload Image"
+  />
+
+  <form
+    [formGroup]="userForm"
+    class="d-flex flex-column align-items-center gap-15 form-container"
+  >
+    <div class="gap-10 user-fullname w-100">
+      <div class="d-flex flex-column gap-5">
+        <label for="username" class="field-label required"
+          >First Name<span class="required-star">*</span></label
+        >
+        <input
+          pInputText
+          id="username"
+          placeholder="Username"
+          aria-describedby="username-help"
+          formControlName="firstName"
+        />
+        <small
+          *ngIf="
+            userForm.get('firstName')?.invalid &&
+            userForm.get('firstName')?.touched
+          "
+          >First Name Is Required.</small
+        >
+      </div>
+
+      <div class="d-flex flex-column gap-5">
+        <label for="username" class="field-label">Middle Name</label>
+        <input
+          pInputText
+          id="username"
+          placeholder="Username"
+          aria-describedby="username-help"
+          formControlName="middleName"
+        />
+        <!-- <small id="username-help">Enter your username to reset your password.</small> -->
+      </div>
+
+      <div class="d-flex flex-column gap-5">
+        <label for="username" class="field-label required"
+          >Last Name<span class="required-star">*</span></label
+        >
+        <input
+          pInputText
+          id="username"
+          placeholder="Username"
+          aria-describedby="username-help"
+          formControlName="lastName"
+        />
+        <small
+          *ngIf="
+            userForm.get('lastName')?.invalid &&
+            userForm.get('lastName')?.touched
+          "
+          >Last Name Is Required.</small
+        >
+      </div>
+    </div>
+
+    <div class="d-flex flex-column gap-5 w-100">
+      <label for="username" class="field-label">Email</label>
+      <p-iconfield>
+        <p-inputicon>
+          <svg
+            width="21"
+            height="16"
+            viewBox="0 0 21 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19.3203 0.5H1.32031C1.1214 0.5 0.930635 0.579018 0.789982 0.71967C0.64933 0.860322 0.570313 1.05109 0.570312 1.25V14C0.570313 14.3978 0.728348 14.7794 1.00965 15.0607C1.29096 15.342 1.67249 15.5 2.07031 15.5H18.5703C18.9681 15.5 19.3497 15.342 19.631 15.0607C19.9123 14.7794 20.0703 14.3978 20.0703 14V1.25C20.0703 1.05109 19.9913 0.860322 19.8506 0.71967C19.71 0.579018 19.5192 0.5 19.3203 0.5ZM17.3919 2L10.3203 8.48281L3.24875 2H17.3919ZM18.5703 14H2.07031V2.95531L9.81312 10.0531C9.95149 10.1801 10.1325 10.2506 10.3203 10.2506C10.5081 10.2506 10.6891 10.1801 10.8275 10.0531L18.5703 2.95531V14Z"
+              fill="#CECBDE"
+            />
+          </svg>
+        </p-inputicon>
+        <input
+          pInputText
+          formControlName="email"
+          placeholder="Large"
+          pSize="large"
+        />
+        <!-- <p-inputicon class="pi pi-spin pi-spinner" /> -->
+      </p-iconfield>
+      <small
+        *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched"
+        >Invalid Email.</small
+      >
+    </div>
+
+    <div class="d-flex flex-column gap-5 w-100">
+      <label for="username" class="field-label">Phone</label>
+      <p-iconfield>
+        <p-inputIcon>
+          <svg
+            width="20"
+            height="19"
+            viewBox="0 0 20 19"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11.8456 1.30593C11.8711 1.21075 11.9151 1.12151 11.975 1.04333C12.035 0.965143 12.1097 0.899537 12.1951 0.85026C12.2804 0.800983 12.3746 0.769 12.4723 0.756139C12.57 0.743278 12.6692 0.749791 12.7644 0.775306C14.1548 1.13807 15.4233 1.86491 16.4394 2.88096C17.4554 3.89702 18.1822 5.16556 18.545 6.55593C18.5705 6.6511 18.577 6.75036 18.5642 6.84805C18.5513 6.94573 18.5193 7.03993 18.4701 7.12525C18.4208 7.21057 18.3552 7.28534 18.277 7.3453C18.1988 7.40526 18.1096 7.44922 18.0144 7.47468C17.951 7.49132 17.8858 7.49983 17.8203 7.49999C17.655 7.49999 17.4944 7.44539 17.3634 7.34469C17.2323 7.24399 17.1382 7.10282 17.0956 6.94312C16.7998 5.80811 16.2066 4.77253 15.3772 3.94314C14.5478 3.11375 13.5122 2.52054 12.3772 2.22468C12.2819 2.19932 12.1926 2.15543 12.1143 2.09552C12.036 2.0356 11.9703 1.96084 11.9209 1.87551C11.8716 1.79018 11.8395 1.69595 11.8266 1.59822C11.8137 1.50048 11.8201 1.40116 11.8456 1.30593ZM11.6272 5.22468C12.92 5.56968 13.7506 6.40031 14.0956 7.69312C14.1382 7.85282 14.2323 7.99399 14.3634 8.09469C14.4944 8.19539 14.655 8.24999 14.8203 8.24999C14.8858 8.24983 14.951 8.24132 15.0144 8.22468C15.1096 8.19922 15.1988 8.15526 15.277 8.0953C15.3552 8.03534 15.4208 7.96057 15.4701 7.87525C15.5193 7.78993 15.5513 7.69573 15.5642 7.59805C15.577 7.50036 15.5705 7.4011 15.545 7.30593C15.065 5.50968 13.8106 4.25531 12.0144 3.77531C11.8222 3.72396 11.6175 3.75107 11.4452 3.85067C11.273 3.95027 11.1474 4.1142 11.0961 4.3064C11.0448 4.4986 11.0719 4.70332 11.1715 4.87553C11.2711 5.04774 11.435 5.17334 11.6272 5.22468ZM19.3091 14.1637C19.1419 15.4341 18.518 16.6001 17.554 17.4441C16.5899 18.2881 15.3516 18.7523 14.0703 18.75C6.62657 18.75 0.570321 12.6937 0.570321 5.24999C0.568024 3.9687 1.03222 2.73039 1.8762 1.76633C2.72018 0.802276 3.88623 0.178406 5.15657 0.0112434C5.47781 -0.0279808 5.80312 0.0377391 6.08393 0.198592C6.36475 0.359445 6.58601 0.606804 6.7147 0.903743L8.6947 5.32406V5.33531C8.79321 5.56261 8.8339 5.81077 8.81313 6.05763C8.79235 6.30449 8.71076 6.54236 8.57563 6.74999C8.55876 6.77531 8.54095 6.79874 8.5222 6.82218L6.57032 9.13593C7.27251 10.5628 8.76501 12.0422 10.2106 12.7462L12.4925 10.8047C12.5149 10.7858 12.5384 10.7683 12.5628 10.7522C12.7703 10.6138 13.009 10.5293 13.2573 10.5064C13.5056 10.4835 13.7557 10.5229 13.985 10.6209L13.9972 10.6266L18.4138 12.6056C18.7112 12.7338 18.9592 12.9549 19.1206 13.2358C19.282 13.5166 19.3481 13.8422 19.3091 14.1637ZM17.8203 13.9762C17.8203 13.9762 17.8138 13.9762 17.81 13.9762L13.4038 12.0028L11.1209 13.9444C11.0988 13.9631 11.0756 13.9807 11.0516 13.9969C10.8357 14.1409 10.5862 14.2264 10.3274 14.2452C10.0686 14.2639 9.80935 14.2152 9.57501 14.1037C7.81907 13.2553 6.06876 11.5181 5.21938 9.78093C5.10691 9.5483 5.05644 9.29055 5.07287 9.03267C5.08929 8.7748 5.17205 8.52554 5.31313 8.30906C5.32904 8.28364 5.3469 8.2595 5.36657 8.23687L7.32032 5.92031L5.35157 1.51406C5.3512 1.51032 5.3512 1.50655 5.35157 1.50281C4.44243 1.6214 3.60771 2.06733 3.00371 2.7571C2.39971 3.44687 2.06786 4.33316 2.07032 5.24999C2.07379 8.43153 3.33919 11.4818 5.58888 13.7314C7.83856 15.9811 10.8888 17.2465 14.0703 17.25C14.9866 17.2531 15.8726 16.9225 16.5628 16.3198C17.253 15.7171 17.7 14.8837 17.8203 13.9753V13.9762Z"
+              fill="#CECBDE"
+            />
+          </svg>
+        </p-inputIcon>
+
+        <p-inputmask
+          mask="+999 9999-9999"
+          formControlName="phone"
+          placeholder="+999 9999-9999"
+        />
+        <!-- <p-inputicon class="pi pi-spin pi-spinner" /> -->
+      </p-iconfield>
+      <!-- <small id="username-help">Enter your username to reset your password.</small> -->
+    </div>
+
+    <div class="d-flex align-items-center gap-10 w-100">
+      <label for="enableRfid" class="field-label">RFI D</label>
+      <p-toggleswitch formControlName="enableRfid" />
+    </div>
+
+    <div class="d-flex flex-column gap-5 w-100">
+      <input
+        pInputText
+        id="rfid"
+        placeholder="RFI D"
+        aria-describedby="rfid-help"
+        formControlName="rfid"
+      />
+    </div>
+
+    <div class="d-flex flex-column gap-5 w-100">
+      <label for="username" class="field-label required"
+        >Role<span class="required-star">*</span></label
+      >
+      <p-select
+        [options]="cities"
+        formControlName="role"
+        optionLabel="name"
+        placeholder="Select a City"
+        class="w-full md:w-56"
+      />
+
+      <small
+        *ngIf="userForm.get('role')?.invalid && userForm.get('role')?.touched"
+        >Role Is Required.</small
+      >
+    </div>
+
+    <div class="d-flex flex-column gap-5 w-100">
+      <label for="username" class="field-label required"
+        >Department<span class="required-star">*</span></label
+      >
+      <p-select
+        [options]="cities"
+        formControlName="department"
+        optionLabel="name"
+        placeholder="Select a City"
+        class="w-full md:w-56"
+      />
+
+      <small
+        *ngIf="
+          userForm.get('department')?.invalid &&
+          userForm.get('department')?.touched
+        "
+        >Department Is Required.</small
+      >
+    </div>
+  </form>
+</div>
