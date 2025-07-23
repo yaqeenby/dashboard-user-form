@@ -181,10 +181,10 @@
         >Role<span class="required-star">*</span></label
       >
       <p-select
-        [options]="cities"
+        [options]="roles"
         formControlName="role"
         optionLabel="name"
-        placeholder="Select a City"
+        placeholder="Select a Role"
         class="w-full md:w-56"
       />
 
@@ -199,10 +199,10 @@
         >Department<span class="required-star">*</span></label
       >
       <p-select
-        [options]="cities"
+        [options]="departments"
         formControlName="department"
         optionLabel="name"
-        placeholder="Select a City"
+        placeholder="Select a Department"
         class="w-full md:w-56"
       />
 
@@ -213,6 +213,17 @@
         "
         >Department Is Required.</small
       >
+    </div>
+
+    <div class="d-flex flex-column gap-5 w-100">
+      <label for="fleet" class="field-label">Fleet</label>
+      <input
+        pInputText
+        id="fleet"
+        placeholder="Fleet"
+        aria-describedby="fleet-help"
+        formControlName="fleet"
+      />
     </div>
   </form>
 </div>

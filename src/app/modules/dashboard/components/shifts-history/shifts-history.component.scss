@@ -11,3 +11,29 @@
 .bolt {
   box-shadow: 0 0 10px 0 $success;
 }
+
+::ng-deep {
+  .table {
+    gap: 60px;
+
+    .p-datatable-thead > tr > th:first-child {
+      min-width: 270px;
+    }
+
+    .p-datatable-thead > tr > th {
+      min-width: 177px;
+    }
+
+    .p-datatable-tbody > tr > td:not(:first-child) {
+      > div:first-child {
+        padding-left: 15px;
+      }
+    }
+
+    .p-datatable-tbody > tr > td:last-child {
+      .status:first-child {
+        justify-content: end;
+      }
+    }
+  }
+}

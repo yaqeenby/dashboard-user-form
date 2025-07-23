@@ -11,7 +11,7 @@ export class MetricCardComponent {
   @Input() value?: number = 0;
   @Input() total?: number;
   @Input() showProgress: boolean = false;
-  @Input() opacity: number = 1;
+  @Input() bgOpacity: number = 1;
 
   get percentage(): number | null {
     if (this.total && this.value != null && this.value != undefined) {

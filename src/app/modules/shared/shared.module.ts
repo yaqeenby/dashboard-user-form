@@ -11,6 +11,7 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { MenuModule } from 'primeng/menu';
 import { FileUpload } from 'primeng/fileupload';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [DataTableComponent],
@@ -26,6 +27,7 @@ import { FileUpload } from 'primeng/fileupload';
     InputIcon,
     MenuModule,
     FileUpload,
+    MultiSelectModule,
   ],
   exports: [
     DataTableComponent,
@@ -40,6 +42,7 @@ import { FileUpload } from 'primeng/fileupload';
     InputIcon,
     MenuModule,
     FileUpload,
+    MultiSelectModule,
   ],
 })
 export class SharedModule {}

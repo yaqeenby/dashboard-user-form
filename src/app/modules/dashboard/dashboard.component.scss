@@ -19,3 +19,13 @@
 
   gap: 60px;
 }
+
+.dashboard-gap {
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-gap {
+    gap: 60px;
+  }
+}

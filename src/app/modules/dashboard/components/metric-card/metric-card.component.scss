@@ -3,7 +3,7 @@
 ::ng-deep .metric-card.p-card {
   width: 100%;
   height: 100%;
-  background-color: $primary-bg !important;
+  background-color: rgba($primary-bg, var(--bg-opacity)) !important;
   color: $text-light !important;
   font-size: 12px;
   line-height: 14px;

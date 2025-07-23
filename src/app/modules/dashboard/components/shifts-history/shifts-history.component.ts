@@ -13,16 +13,15 @@ export class ShiftsHistoryComponent implements OnInit {
   @Input() showSearchAndActions: boolean = false;
   @Input() stateKey: string = '';
 
-  allColumns = [
-    { field: 'vehicle', header: 'Vehicle', sortable: true },
-    { field: 'plateNum', header: 'PlateNum', sortable: true },
-    { field: 'odometer', header: 'Odometer' },
-    { field: 'GPS', header: 'GPS' },
-    { field: 'device', header: 'Device' },
-    { field: 'SIM', header: 'SIM' },
-    { field: 'fleet', header: 'Fleet' },
-    { field: 'status', header: 'Status' },
-    { field: 'actions', header: '' },
+  columns = [
+    { field: 'vehicle', header: 'Vehicle', sortable: true, visible: true },
+    { field: 'plateNum', header: 'PlateNum', sortable: true, visible: true },
+    { field: 'odometer', header: 'Odometer', visible: true },
+    { field: 'GPS', header: 'GPS', visible: true },
+    { field: 'device', header: 'Device', visible: true },
+    { field: 'SIM', header: 'SIM', visible: true },
+    { field: 'fleet', header: 'Fleet', visible: true },
+    { field: 'status', header: 'Status', visible: true },
   ];
 
   globalFilterFields = ['vehicle', 'plateNum'];
@@ -46,7 +45,7 @@ export class ShiftsHistoryComponent implements OnInit {
   tableStyle = { 'min-width': '50rem' };
   dataKey: string = 'id';
 
-  columns: any[] = [...this.allColumns];
+  selectedColumns: any[] = [];
 
   ngOnInit() {
     if (this.stateKey && localStorage) {
@@ -56,16 +55,16 @@ export class ShiftsHistoryComponent implements OnInit {
         const colOrder = parsed?.columnOrder;
 
         if (colOrder?.length) {
-          this.columns = colOrder
+          this.selectedColumns = colOrder
             .map((colField: string) =>
-              this.allColumns.find((c) => c.field === colField)
+              this.columns.find((c) => c.field === colField)
             )
             .filter(Boolean);
         } else {
-          this.columns = [...this.allColumns];
+          this.selectedColumns = [...this.columns];
         }
       } else {
-        this.columns = [...this.allColumns];
+        this.selectedColumns = [...this.columns];
       }
     }
   }
@@ -73,22 +72,16 @@ export class ShiftsHistoryComponent implements OnInit {
   getSeverity(status: number) {
     switch (status) {
       case 1:
-        return 'danger';
+        return 'Accepted';
 
       case 2:
-        return 'success';
+        return 'Active';
 
       case 3:
-        return 'info';
-
-      case 4:
-        return 'warn';
-
-      case 5:
-        return 'pending';
+        return 'Completed';
     }
 
-    return 'pending';
+    return 'Pending';
   }
 
   export() {
@@ -97,6 +90,6 @@ export class ShiftsHistoryComponent implements OnInit {
   }
 
   onColReorder(event: any) {
-    this.columns = [...event.columns]; // أو حسب ترتيب الحدث
+    this.selectedColumns = [...event.columns];
   }
 }

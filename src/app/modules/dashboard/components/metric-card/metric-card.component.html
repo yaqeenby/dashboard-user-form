@@ -1,4 +1,4 @@
-<p-card class="metric-card">
+<p-card class="metric-card" [style.--bg-opacity]="bgOpacity">
   <p-knob
     *ngIf="showProgress"
     [(ngModel)]="percentage"

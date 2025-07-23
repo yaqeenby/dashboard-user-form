@@ -1,4 +1,4 @@
-<div class="d-flex flex-column gap-30">
+<div class="d-flex flex-column dashboard-gap">
   <div
     style="
       display: grid;
@@ -12,7 +12,7 @@
         [value]="card.value"
         [total]="card.total"
         [showProgress]="!!(card.value && card.total)"
-        [opacity]="card.opacity"
+        [bgOpacity]="card.opacity"
       ></app-metric-card>
     </ng-container>
   </div>

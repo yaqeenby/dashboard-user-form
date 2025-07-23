@@ -88,6 +88,10 @@ body {
   width: 100%;
 }
 
+.text-capitalize {
+  text-transform: capitalize;
+}
+
 .table {
   .p-datatable .p-datatable-tbody > tr {
     background-color: transparent;
@@ -99,13 +103,13 @@ body {
     border-color: $borders !important;
   }
 
-  ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
-    background-color: #e0f7fa;
+  .p-datatable .p-datatable-tbody > tr:hover {
     cursor: pointer;
   }
 
   .p-datatable-tbody > tr > td {
     padding: 15px;
+    white-space: nowrap;
   }
 
   .p-datatable-thead > tr > th {
@@ -203,6 +207,69 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    p-multiselect {
+      z-index: 2;
+    }
+
+    .p-multiselect-dropdown {
+      width: 40px;
+      height: 40px;
+    }
+    .p-multiselect-label {
+      display: none;
+    }
+    .p-multiselect-dropdown {
+      background-color: $btn-prim-bkg;
+      border-radius: 10px;
+      opacity: 0;
+    }
+
+    .p-multiselect {
+      border: none;
+      position: relative;
+      background: transparent;
+    }
+
+    .p-multiselect .p-multiselect-trigger::after {
+      content: "";
+      background-image: "./assets/icons/invoice.svg";
+    }
+
+    svg {
+      position: absolute;
+      z-index: 1;
+    }
+
+    .p-multiselect-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: unset;
+      width: 200px;
+      background-color: $btn-prim-bkg;
+      border: none;
+    }
+
+    .p-multiselect-option.p-multiselect-option-selected.p-focus {
+      background: transparent;
+    }
+
+    .p-multiselect-option.p-multiselect-option-selected {
+      background: transparent;
+    }
+
+    .p-multiselect-list {
+      li {
+        font-size: 13px;
+        color: $text-prim;
+
+        .p-checkbox-checked .p-checkbox-box {
+          background: $success;
+          border-color: $success;
+        }
+      }
+    }
   }
 
   p-sorticon {
@@ -215,6 +282,42 @@ body {
 
         path {
           fill: $borders;
+        }
+      }
+    }
+  }
+
+  .p-datatable-table-container {
+    &::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $borders;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $primary-bg-deep;
+      border-radius: 10px;
+      transition: background 0.3s ease;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: $primary-bg-deep;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .table {
+    .export-btn,
+    .import-btn {
+      .p-button {
+        padding-right: 0px !important;
+        .p-button-label {
+          display: none;
         }
       }
     }

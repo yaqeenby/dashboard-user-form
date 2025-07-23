@@ -32,7 +32,7 @@
   <p-table
     #dataTable
     [value]="products"
-    [columns]="columns"
+    [columns]="selectedColumns"
     [globalFilterFields]="globalFilterFields"
     [dataKey]="dataKey"
     [tableStyle]="tableStyle"
@@ -40,6 +40,7 @@
     [stateKey]="stateKey"
     [reorderableColumns]="true"
     (onColReorder)="onColReorder($event)"
+    [scrollable]="true"
   >
     <!-- Caption Slot -->
     <ng-template #caption>
@@ -66,32 +67,15 @@
 
     <!-- Header -->
     <ng-template pTemplate="header">
-      <!-- [pSortableColumn]="col.sortable ? col.field : ''" -->
       <tr>
         <th
-          *ngFor="let col of columns"
+          *ngFor="let col of selectedColumns; let last = last"
           pReorderableColumn
           [pSortableColumn]="col.sortable ? col.field : ''"
+          width="200"
         >
-          <ng-container [ngSwitch]="col.field">
-            <div *ngSwitchCase="'actions'" class="d-flex justify-content-end">
-              <div class="columns-plus">
-                <svg
-                  width="17"
-                  height="16"
-                  viewBox="0 0 17 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10 0.762085H8.125C7.79348 0.762085 7.47554 0.893781 7.24112 1.1282C7.0067 1.36262 6.875 1.68056 6.875 2.01208V14.5121C6.875 14.8436 7.0067 15.1615 7.24112 15.396C7.47554 15.6304 7.79348 15.7621 8.125 15.7621H10C10.3315 15.7621 10.6495 15.6304 10.8839 15.396C11.1183 15.1615 11.25 14.8436 11.25 14.5121V2.01208C11.25 1.68056 11.1183 1.36262 10.8839 1.1282C10.6495 0.893781 10.3315 0.762085 10 0.762085ZM10 14.5121H8.125V2.01208H10V14.5121ZM15.625 0.762085H13.75C13.4185 0.762085 13.1005 0.893781 12.8661 1.1282C12.6317 1.36262 12.5 1.68056 12.5 2.01208V14.5121C12.5 14.8436 12.6317 15.1615 12.8661 15.396C13.1005 15.6304 13.4185 15.7621 13.75 15.7621H15.625C15.9565 15.7621 16.2745 15.6304 16.5089 15.396C16.7433 15.1615 16.875 14.8436 16.875 14.5121V2.01208C16.875 1.68056 16.7433 1.36262 16.5089 1.1282C16.2745 0.893781 15.9565 0.762085 15.625 0.762085ZM15.625 14.5121H13.75V2.01208H15.625V14.5121ZM5.625 8.26208C5.625 8.42785 5.55915 8.58682 5.44194 8.70403C5.32473 8.82124 5.16576 8.88708 5 8.88708H3.75V10.1371C3.75 10.3028 3.68415 10.4618 3.56694 10.579C3.44973 10.6962 3.29076 10.7621 3.125 10.7621C2.95924 10.7621 2.80027 10.6962 2.68306 10.579C2.56585 10.4618 2.5 10.3028 2.5 10.1371V8.88708H1.25C1.08424 8.88708 0.925268 8.82124 0.808058 8.70403C0.690848 8.58682 0.625 8.42785 0.625 8.26208C0.625 8.09632 0.690848 7.93735 0.808058 7.82014C0.925268 7.70293 1.08424 7.63708 1.25 7.63708H2.5V6.38708C2.5 6.22132 2.56585 6.06235 2.68306 5.94514C2.80027 5.82793 2.95924 5.76208 3.125 5.76208C3.29076 5.76208 3.44973 5.82793 3.56694 5.94514C3.68415 6.06235 3.75 6.22132 3.75 6.38708V7.63708H5C5.16576 7.63708 5.32473 7.70293 5.44194 7.82014C5.55915 7.93735 5.625 8.09632 5.625 8.26208Z"
-                    fill="#CECBDE"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            <div *ngSwitchDefault class="d-flex align-items-center gap-5">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-5">
               <svg
                 width="8"
                 height="12"
@@ -110,7 +94,32 @@
               <p-sortIcon *ngIf="col.sortable" [field]="col.field">
               </p-sortIcon>
             </div>
-          </ng-container>
+
+            <div class="columns-plus" *ngIf="last">
+              <p-multiselect
+                #select
+                [options]="columns"
+                [(ngModel)]="selectedColumns"
+                [invalid]="true"
+                optionLabel="header"
+                [showToggleAll]="false"
+                placeholder="Select Columns"
+              />
+
+              <svg
+                width="17"
+                height="16"
+                viewBox="0 0 17 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10 0.762085H8.125C7.79348 0.762085 7.47554 0.893781 7.24112 1.1282C7.0067 1.36262 6.875 1.68056 6.875 2.01208V14.5121C6.875 14.8436 7.0067 15.1615 7.24112 15.396C7.47554 15.6304 7.79348 15.7621 8.125 15.7621H10C10.3315 15.7621 10.6495 15.6304 10.8839 15.396C11.1183 15.1615 11.25 14.8436 11.25 14.5121V2.01208C11.25 1.68056 11.1183 1.36262 10.8839 1.1282C10.6495 0.893781 10.3315 0.762085 10 0.762085ZM10 14.5121H8.125V2.01208H10V14.5121ZM15.625 0.762085H13.75C13.4185 0.762085 13.1005 0.893781 12.8661 1.1282C12.6317 1.36262 12.5 1.68056 12.5 2.01208V14.5121C12.5 14.8436 12.6317 15.1615 12.8661 15.396C13.1005 15.6304 13.4185 15.7621 13.75 15.7621H15.625C15.9565 15.7621 16.2745 15.6304 16.5089 15.396C16.7433 15.1615 16.875 14.8436 16.875 14.5121V2.01208C16.875 1.68056 16.7433 1.36262 16.5089 1.1282C16.2745 0.893781 15.9565 0.762085 15.625 0.762085ZM15.625 14.5121H13.75V2.01208H15.625V14.5121ZM5.625 8.26208C5.625 8.42785 5.55915 8.58682 5.44194 8.70403C5.32473 8.82124 5.16576 8.88708 5 8.88708H3.75V10.1371C3.75 10.3028 3.68415 10.4618 3.56694 10.579C3.44973 10.6962 3.29076 10.7621 3.125 10.7621C2.95924 10.7621 2.80027 10.6962 2.68306 10.579C2.56585 10.4618 2.5 10.3028 2.5 10.1371V8.88708H1.25C1.08424 8.88708 0.925268 8.82124 0.808058 8.70403C0.690848 8.58682 0.625 8.42785 0.625 8.26208C0.625 8.09632 0.690848 7.93735 0.808058 7.82014C0.925268 7.70293 1.08424 7.63708 1.25 7.63708H2.5V6.38708C2.5 6.22132 2.56585 6.06235 2.68306 5.94514C2.80027 5.82793 2.95924 5.76208 3.125 5.76208C3.29076 5.76208 3.44973 5.82793 3.56694 5.94514C3.68415 6.06235 3.75 6.22132 3.75 6.38708V7.63708H5C5.16576 7.63708 5.32473 7.70293 5.44194 7.82014C5.55915 7.93735 5.625 8.09632 5.625 8.26208Z"
+                  fill="#CECBDE"
+                />
+              </svg>
+            </div>
+          </div>
         </th>
       </tr>
     </ng-template>
@@ -191,12 +200,7 @@
               <span class="ml-1 align-middle">{{ rowData.SIM.size }}</span>
               <br />
             </div>
-            <p-tag
-              *ngSwitchCase="'status'"
-              [value]="rowData.status"
-              [severity]="getSeverity(rowData.status)"
-            />
-            <div *ngSwitchCase="'actions'" class="d-flex">
+            <div *ngSwitchCase="'status'" class="d-flex status">
               <!-- <p-menu #menu [model]="items" [popup]="true" />
               (click)="menu.toggle($event)" -->
 
@@ -204,7 +208,7 @@
                 icon="pi pi-angle-down"
                 variant="outlined"
                 severity="contrast"
-                label="Check"
+                [label]="getSeverity(rowData.status)"
               />
             </div>
             <div *ngSwitchDefault>
@@ -218,7 +222,7 @@
     <!-- Empty -->
     <ng-template #emptymessage>
       <tr>
-        <td [attr.colspan]="columns.length">No records found.</td>
+        <td [attr.colspan]="selectedColumns.length">No records found.</td>
       </tr>
     </ng-template>
   </p-table>

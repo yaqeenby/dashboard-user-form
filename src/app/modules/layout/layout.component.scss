@@ -50,6 +50,7 @@
       .p-tieredmenu-submenu {
         background: $primary-bg-deep !important;
         border: none !important;
+        z-index: 20;
       }
 
       .p-panelmenu-item.p-focus > .p-panelmenu-item-content {

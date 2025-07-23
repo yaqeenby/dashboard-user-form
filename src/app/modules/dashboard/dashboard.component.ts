@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
         size: '1.5GB',
       },
       fleet: 'Q22',
-      status: 4,
+      status: 2,
     },
     {
       id: 2,
@@ -93,7 +93,7 @@ export class DashboardComponent implements OnInit {
         size: '1.5GB',
       },
       fleet: 'Q22',
-      status: 4,
+      status: 2,
     },
     {
       id: 3,
@@ -111,7 +111,7 @@ export class DashboardComponent implements OnInit {
         size: '1.5GB',
       },
       fleet: 'Q22',
-      status: 4,
+      status: 2,
     },
     {
       id: 4,
@@ -129,7 +129,7 @@ export class DashboardComponent implements OnInit {
         size: '1.5GB',
       },
       fleet: 'Q22',
-      status: 4,
+      status: 2,
     },
   ];
 
@@ -152,17 +152,11 @@ export class DashboardComponent implements OnInit {
   exportColumns = [{ title: 'id', dataKey: 'id' }];
 
   ngOnInit(): void {
-    var opacity = [1, 0.6, 0.35];
-    var opacityIndex = 0;
     for (let i = 0; i < this.cards.length; i++) {
-      this.cards[i].opacity = opacity[opacityIndex];
-
-      if (i % 3 == 0) {
-        opacityIndex =
-          opacityIndex + 1 == opacity.length ? 0 : opacityIndex + 1;
-      }
+      this.cards[i].opacity = this.getOpacity(i);
     }
   }
+
   getSeverity(status: number) {
     switch (status) {
       case 1:
@@ -182,5 +176,21 @@ export class DashboardComponent implements OnInit {
     }
 
     return 'pending';
+  }
+
+  getOpacity(index: number): number {
+    const group = Math.floor(index / 3);
+    switch (group) {
+      case 0:
+        return 1;
+      case 1:
+        return 0.6;
+      case 2:
+        return 0.35;
+      case 3:
+        return 0.15;
+      default:
+        return 0.1; // fallback for more than 12 items
+    }
   }
 }

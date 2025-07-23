@@ -12,20 +12,14 @@ import { elementAt } from 'rxjs';
 })
 export class AddUserComponent implements OnInit {
   userForm!: FormGroup;
-  checked = false;
-  value3: any;
-  value1: any;
-  value2: any;
-  value: any;
-  value4: any;
+  roles = [
+    { id: 1, name: 'Admin' },
+    { id: 2, name: 'Manager' },
+  ];
 
-  selectedCity: any;
-  cities = [
-    { name: 'New York', code: 'NY' },
-    { name: 'Rome', code: 'RM' },
-    { name: 'London', code: 'LDN' },
-    { name: 'Istanbul', code: 'IST' },
-    { name: 'Paris', code: 'PRS' },
+  departments = [
+    { id: 1, name: 'IT' },
+    { id: 2, name: 'HR' },
   ];
 
   previewUrl: string | ArrayBuffer | null = null;
@@ -46,6 +40,7 @@ export class AddUserComponent implements OnInit {
       rfid: [''],
       role: [null, Validators.required],
       department: [null, Validators.required],
+      fleet: [''],
     });
 
     this.userForm.get('enableRfid')?.valueChanges.subscribe((v) => {
