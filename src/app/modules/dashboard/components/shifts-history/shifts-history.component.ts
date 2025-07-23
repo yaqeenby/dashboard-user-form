@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
+import { Shift } from '../../../../types/shift.type';
 
 @Component({
   selector: 'app-shifts-history',
@@ -9,7 +10,7 @@ import { Table } from 'primeng/table';
 })
 export class ShiftsHistoryComponent implements OnInit {
   @ViewChild('dataTable') dt!: Table;
-  @Input() products: any[] = [];
+  @Input() shift: Shift | null = null;
   @Input() showSearchAndActions: boolean = false;
   @Input() stateKey: string = '';
 

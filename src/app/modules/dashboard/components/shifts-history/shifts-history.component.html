@@ -1,4 +1,4 @@
-<div class="d-flex flex-column gap-20 table">
+<div class="d-flex flex-column gap-20 table" *ngIf="shift">
   <div class="d-flex gap-15" *ngIf="showSearchAndActions">
     <p-iconfield iconPosition="left" class="flex-grow-1">
       <p-inputicon>
@@ -31,7 +31,7 @@
 
   <p-table
     #dataTable
-    [value]="products"
+    [value]="shift.trips"
     [columns]="selectedColumns"
     [globalFilterFields]="globalFilterFields"
     [dataKey]="dataKey"
@@ -59,8 +59,11 @@
         </svg>
 
         <div>
-          <label class="table-title">Afternoon Shift</label>
-          <p class="table-description m-0">12:00 PM - 08:00 PM</p>
+          <label class="table-title">{{ shift.name }}</label>
+          <p class="table-description m-0">
+            {{ shift.startDate | date : "hh:mm a" }} -
+            {{ shift.endDate | date : "hh:mm a" }}
+          </p>
         </div>
       </div>
     </ng-template>

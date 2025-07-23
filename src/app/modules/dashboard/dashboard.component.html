@@ -1,34 +1,34 @@
 <div class="d-flex flex-column dashboard-gap">
   <div
+    *ngIf="KPIs"
     style="
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
       gap: 20px;
     "
   >
-    <ng-container *ngFor="let card of cards">
+    <ng-container *ngFor="let elem of KPIsElements">
       <app-metric-card
-        [title]="card.label"
-        [value]="card.value"
-        [total]="card.total"
-        [showProgress]="!!(card.value && card.total)"
-        [bgOpacity]="card.opacity"
+        [title]="elem.label"
+        [value]="elem.value"
+        [total]="elem.total"
+        [showProgress]="!!(elem.value && elem.total)"
+        [bgOpacity]="elem.opacity ?? 1"
       ></app-metric-card>
     </ng-container>
   </div>
 
   <div class="d-flex flex-column tables-container">
-    <app-shifts-history
-      [products]="products"
-      [showSearchAndActions]="true"
-      stateKey="shift-history-one"
-    ></app-shifts-history>
+    <ng-container
+      *ngFor="let shift of shifts; let first = first; let last = last"
+    >
+      <app-shifts-history
+        [shift]="shift"
+        [showSearchAndActions]="!!first"
+        stateKey="shift-history-one"
+      ></app-shifts-history>
 
-    <hr class="divider" />
-
-    <app-shifts-history
-      [products]="products"
-      stateKey="shift-history-two"
-    ></app-shifts-history>
+      <hr *ngIf="!last" class="divider" />
+    </ng-container>
   </div>
 </div>

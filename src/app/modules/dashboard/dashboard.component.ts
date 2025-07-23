@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { DashbordService } from './services/dashboard.service';
+import { Shift } from '../../types/shift.type';
+import { error } from 'console';
+import { KPIs, KPIvalue } from './types/kpi.type';
 
 @Component({
   selector: 'app-dashboard',
@@ -151,10 +155,53 @@ export class DashboardComponent implements OnInit {
 
   exportColumns = [{ title: 'id', dataKey: 'id' }];
 
+  loadingShifts = false;
+  shifts: Shift[] = [];
+
+  loadingKPIs = false;
+  KPIs: KPIs | null = null;
+  KPIsElements: KPIvalue[] = [];
+  constructor(private dashbordService: DashbordService) {}
+
   ngOnInit(): void {
-    for (let i = 0; i < this.cards.length; i++) {
-      this.cards[i].opacity = this.getOpacity(i);
-    }
+    this.loadKPIs();
+    this.loadShifts();
+  }
+
+  loadKPIs() {
+    this.loadingKPIs = true;
+    this.dashbordService.getKPIs().subscribe(
+      (res) => {
+        this.KPIs = res as KPIs;
+
+        if (this.KPIs) {
+          let i = 0;
+          this.KPIsElements = [];
+          for (let [key, value] of Object.entries(this.KPIs)) {
+            value.opacity = this.getOpacity(i);
+            this.KPIsElements.push(value);
+            i++;
+          }
+        }
+        this.loadingKPIs = false;
+      },
+      (error) => {
+        this.loadingKPIs = false;
+      }
+    );
+  }
+
+  loadShifts() {
+    this.loadingShifts = true;
+    this.dashbordService.getShifts().subscribe(
+      (res) => {
+        this.shifts = res;
+        this.loadingShifts = false;
+      },
+      (error) => {
+        this.loadingShifts = false;
+      }
+    );
   }
 
   getSeverity(status: number) {
