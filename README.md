@@ -1,27 +1,58 @@
 # DashboardUserForm
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.5.
+## 📦 Project
 
-## Development server
+Angular application with a dashboard and a user creation.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- 📊 **Dashboard KPIs Overview** – View key performance indicators at a glance
+- 👤 **User Shift Details** – Inspect individual user shift history and details
+- ➕ **User Management** – List existing users and add new users through a form
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🛠️ Tech Stack
 
-## Running unit tests
+- Angular v19+.
+- Save and retrieve data using a mock backend (jsonserver).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## 🧾 Assumptions Made
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- User authentication is handled externally. The app assumes that a valid user session or token already exists and does not include login or authentication logic.
 
-## Further help
+- No CSS framework (like Bootstrap or Tailwind) was specified in the instructions, so I implemented the required styles manually using SCSS for full control and customization.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Assumed API returns paginated responses
+- ***
+
+## 📦 Setup Instructions
+
+### ✅ Prerequisites
+
+- Node v20+
+- Angular CLI v19+
+- Package Manager v10+
+
+---
+
+### 🔧 Installation
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/yaqeenby/dashboard-user-form.git
+
+# 2. Navigate to the project
+cd dashboard-user-form
+
+# 3. Install dependencies
+npm install
+```
+
+### Run
+
+Run `npm start` and then navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
