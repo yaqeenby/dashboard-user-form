@@ -1,3 +1,9 @@
 <p-toast />
 
+<p-blockUI [blocked]="isLoading | async">
+  <div class="my-spinner-container">
+    <p-progressSpinner styleClass="my-spinner"></p-progressSpinner>
+  </div>
+</p-blockUI>
+
 <router-outlet></router-outlet>

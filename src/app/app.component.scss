@@ -1,49 +1,12 @@
-@use "variables" as *;
-
-.card-value {
-  color: $text-prim;
-
-  .value {
-    color: white;
-    font-size: $font-14;
-    font-weight: 700;
-  }
+.my-spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.card-label {
-  text-align: center;
-}
-
-.vehicle-tag {
-  border-radius: $space-6;
-  border: $space-1 solid $prim-shade-2;
-  padding: 0 $space-4;
-  color: $prim-shade-2;
-  font-size: $font-13;
-}
-
-.bolt {
-  box-shadow: 0 0 $space-10 0 $success;
-}
-
-::ng-deep .p-button-outlined.p-button-contrast {
-  flex-direction: row-reverse;
-  padding: $space-5;
-  color: $text-prim;
-  border: $space-1 solid $prim-shade;
-  font-size: $font-14;
-}
-
-::ng-deep .p-inputtext {
-  width: 100%;
-}
-
-.export-btn {
-  ::ng-deep .p-button {
-    background-color: $btn-prim-bkg;
-    border-color: $btn-prim-bkg;
-    box-shadow: 0 $space-1 $space-1 0 #02001799;
-    color: $text-prim;
-    font-size: $font-14;
-  }
+.my-spinner {
+  width: 50px;
+  height: 50px;
+  color: var(--primary-color); // Or customize your own color
 }

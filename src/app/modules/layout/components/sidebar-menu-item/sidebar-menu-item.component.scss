@@ -54,6 +54,13 @@
   }
 
   &.small {
+    width: $space-96;
+    height: $space-48;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    white-space: nowrap;
+
     gap: $space-10;
     flex-direction: column;
     height: $space-96;
@@ -81,6 +88,7 @@
       flex-direction: row;
       justify-content: unset;
       height: unset;
+      width: 100%;
 
       .icon {
         width: $space-32;
@@ -94,8 +102,51 @@
       }
 
       .label {
-        font-size: $font-12;
+        font-size: $font-13;
       }
+    }
+  }
+
+  &.small.expanded {
+    width: 334px;
+    left: 20%;
+    justify-content: start;
+    flex-direction: row;
+    height: fit-content;
+    background: linear-gradient(
+      to right,
+      rgba(0, 197, 214, 0.5411764706) 0%,
+      rgba(26, 26, 37) 22%,
+      rgba(26, 26, 37) 100%
+    );
+    box-shadow: $space-6 0 $space-10 0 rgba(0, 0, 0, 0.2);
+    border-radius: $space-15;
+    border: $space-1 solid $borders;
+    padding: $space-12;
+    z-index: 5;
+    border-bottom-right-radius: 0;
+    gap: $space-15;
+
+    .icon {
+      width: $space-60;
+      height: $space-48;
+      background-color: transparent;
+      justify-content: start;
+
+      img {
+        filter: brightness(0.9) saturate(80%) invert(59%) sepia(80%)
+          saturate(320%) hue-rotate(140deg);
+      }
+    }
+
+    .icon:hover {
+      background-color: transparent;
+    }
+
+    .label {
+      font-size: $space-16;
+      color: $text-prim;
+      font-weight: 600;
     }
   }
 
@@ -165,10 +216,40 @@
 
   .item-action {
     border-radius: $space-8;
-    padding: $space-7;
+    padding: $space-5;
     background-color: $primary-tint;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+.menu-content {
+  position: absolute;
+  background: rgba(26, 26, 37);
+  filter: blur(35%);
+  border-bottom-right-radius: $space-16;
+  padding: $space-12 0;
+  width: 261px;
+  color: white;
+  transform: translateX(30%);
+  z-index: 5;
+  box-shadow: $space-6 0 $space-10 0 rgba(0, 0, 0, 0.2);
+  border: $space-1 solid $borders;
+  border-top: 0;
+  left: 15%;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 20px;
+    background: rgb(255 255 255 / 30%);
+    filter: blur(27px);
+    z-index: -1;
+    pointer-events: none;
   }
 }

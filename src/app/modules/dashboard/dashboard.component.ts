@@ -13,6 +13,8 @@ import {
   switchMap,
   takeUntil,
 } from 'rxjs';
+import { LoadingService } from '../../services/loading.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,16 +23,16 @@ import {
   standalone: false,
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  loadingShifts = false;
   shifts: Shift[] = [];
-
-  loadingKPIs = false;
   KPIs: KPIs | null = null;
   KPIsElements: KPIvalue[] = [];
   searchControl = new FormControl();
   private destroy$ = new Subject<void>();
 
-  constructor(private dashbordService: DashbordService) {}
+  constructor(
+    private dashbordService: DashbordService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.loadKPIs();
@@ -54,15 +56,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   loadShifts() {
-    this.loadingShifts = true;
-
     this.getFilteredShifts().subscribe(
       (res) => {
         this.shifts = res;
-        this.loadingShifts = false;
       },
       (error) => {
-        this.loadingShifts = false;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Something Went Wrong',
+        });
       }
     );
   }
@@ -96,7 +99,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   loadKPIs() {
-    this.loadingKPIs = true;
     this.dashbordService.getKPIs().subscribe(
       (res) => {
         this.KPIs = res as KPIs;
@@ -110,10 +112,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
             i++;
           }
         }
-        this.loadingKPIs = false;
       },
       (error) => {
-        this.loadingKPIs = false;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Something Went Wrong',
+        });
       }
     );
   }

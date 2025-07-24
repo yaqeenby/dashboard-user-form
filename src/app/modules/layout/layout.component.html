@@ -33,7 +33,7 @@
         </p-panelmenu>
       </ng-container>
       <ng-template #tieredmenu>
-        <p-tieredmenu class="menu" [model]="activeRoutingService.routes">
+        <!-- <p-tieredmenu class="menu" [model]="activeRoutingService.routes">
           <ng-template #item let-item>
             <app-sidebar-menu-item
               variant="small"
@@ -41,7 +41,18 @@
               [selected]="isActive(item.id)"
             ></app-sidebar-menu-item>
           </ng-template>
-        </p-tieredmenu>
+        </p-tieredmenu> -->
+
+        <div
+          *ngFor="let item of activeRoutingService.routes"
+          class="menu-wrapper"
+        >
+          <app-sidebar-menu-item
+            variant="small"
+            [item]="item"
+            [selected]="isActive(item.id ?? '')"
+          ></app-sidebar-menu-item>
+        </div>
       </ng-template>
     </div>
 

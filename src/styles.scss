@@ -1,5 +1,9 @@
 @use "variables" as *;
+@use "sass:color";
+
 @import "primeicons/primeicons.css";
+
+$dark-btn-green: color.adjust($Com-success-2, $lightness: -20%);
 
 body {
   font-family: "Poppins", sans-serif;
@@ -310,6 +314,99 @@ body {
   }
 }
 
+.btn-cancel {
+  .p-button-text {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    padding: $space-10 $space-16;
+    font-size: $font-14;
+    color: $btn-prim-text;
+
+    &:hover {
+      color: $dark-btn-green !important;
+    }
+
+    &:active {
+      color: $dark-btn-green !important;
+    }
+  }
+
+  .p-button:focus-visible {
+    outline: unset !important;
+  }
+}
+
+.btn-primary {
+  .p-button {
+    border-radius: $space-10;
+    background-color: $Com-success-2 !important;
+    border-color: $Com-success-2 !important;
+    padding: $space-10 $space-15;
+    font-size: $font-14;
+    color: $btn-prim-text-click-focus;
+
+    &:hover {
+      background-color: $dark-btn-green !important;
+      border-color: $dark-btn-green !important;
+    }
+
+    &:active {
+      background-color: $dark-btn-green !important;
+      border-color: $dark-btn-green !important;
+    }
+  }
+}
+
+.form {
+  padding: $space-30;
+
+  .field-label {
+    color: $text-light !important;
+    font-size: $font-13;
+    line-height: $space-21;
+  }
+
+  .field-label.required {
+    color: $text-sec !important;
+
+    .required-star {
+      color: $Danger;
+    }
+  }
+
+  .p-inputtext {
+    background-color: transparent !important;
+  }
+
+  .p-inputtext,
+  .p-select {
+    background-color: $primary-bg !important;
+    border-radius: $space-10 !important;
+    padding: $space-13 $space-8;
+    padding-left: $space-15;
+    border-color: $primary-bg !important;
+    color: $text-prim !important;
+    font-size: $font-14;
+  }
+
+  .p-select-label {
+    padding: 0;
+    font-size: $font-14;
+  }
+
+  p-iconfield .p-inputtext {
+    padding-left: $space-40;
+    width: 100%;
+  }
+
+  small {
+    color: $Danger;
+    font-size: $font-12;
+    font-weight: 400;
+    padding: 0 $space-5;
+  }
+}
+
 @media (max-width: $screen-md) {
   .table {
     .export-btn,
@@ -321,5 +418,10 @@ body {
         }
       }
     }
+  }
+
+  .form {
+    padding-left: 0;
+    padding-right: 0;
   }
 }

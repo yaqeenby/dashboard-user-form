@@ -281,6 +281,19 @@
       "role": "Manager",
       "department": "HR",
       "fleet": "asdasd"
+    },
+    {
+      "id": "0c07",
+      "firstName": "asd",
+      "middleName": "asd",
+      "lastName": "asdas",
+      "email": "yaqeen@sadq.sa",
+      "phone": "+962 7780-9359",
+      "enableRfid": false,
+      "rfid": "sss",
+      "role": "Admin",
+      "department": "IT",
+      "fleet": "asdasd"
     }
   ]
 }

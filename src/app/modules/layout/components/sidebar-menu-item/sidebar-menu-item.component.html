@@ -1,10 +1,13 @@
 <div
   pRipple
-  class="menu-item"
+  class="menu-item menu-header"
   [ngClass]="variant"
   [class.selected]="selected"
   [class.child]="item['isChild']"
   *ngIf="item"
+  [class.expanded]="isExpanded(item)"
+  (click)="onClickItem($event, item)"
+  [attr.sub-menu]="''"
 >
   <div class="icon">
     <img [src]="'../../../../../' + item.icon" alt="icon" />
@@ -41,4 +44,15 @@
       'pi-angle-up': item.expanded
     }"
   ></i>
+</div>
+
+<!-- Submenu under expanded area -->
+<div *ngIf="item?.items && isExpanded(item)" class="menu-content">
+  <app-sidebar-menu-item
+    *ngFor="let sub of item?.items!"
+    (click)="navigate(sub)"
+    variant="small"
+    [item]="sub"
+    [selected]="sub.id == activeRoutingService.activeRoute"
+  ></app-sidebar-menu-item>
 </div>
