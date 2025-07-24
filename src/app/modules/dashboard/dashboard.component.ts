@@ -138,4 +138,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         return 0.1; // fallback for more than 12 items
     }
   }
+
+  reloadShifts() {
+    this.searchControl.reset();
+    this.loadShifts();
+  }
 }

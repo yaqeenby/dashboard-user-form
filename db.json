@@ -134,6 +134,410 @@
           "status": "active"
         }
       ]
+    },
+    {
+      "id": "1",
+      "name": "Morning Shift",
+      "startDate": "2025-07-23 07:30:45",
+      "endDate": "2025-07-23 12:30:45",
+      "trips": [
+        {
+          "id": "1",
+          "vehicle": "vehicle001",
+          "plateNum": "12-34567",
+          "odometer": "65950 KM",
+          "GPS": "3 Nov 2024 15:05:09",
+          "device": {
+            "name": "Teltonika FMB920",
+            "serial": "FMB920-C03-3-092.1"
+          },
+          "SIM": {
+            "name": "Zain SIM A1",
+            "size": "128 KB"
+          },
+          "fleet": "Q22",
+          "status": "active"
+        },
+        {
+          "id": "2",
+          "vehicle": "vehicle002",
+          "plateNum": "66-98765",
+          "odometer": "120320 KM",
+          "GPS": "4 Nov 2024 08:15:42",
+          "device": {
+            "name": "Ruptela Trace5",
+            "serial": "RT5-B12-7-001.5"
+          },
+          "SIM": {
+            "name": "Orange SIM B2",
+            "size": "64 KB"
+          },
+          "fleet": "A18",
+          "status": "inactive"
+        },
+        {
+          "id": "3",
+          "vehicle": "vehicle003",
+          "plateNum": "77-12345",
+          "odometer": "87410 KM",
+          "GPS": "5 Nov 2024 19:42:27",
+          "device": {
+            "name": "Queclink GV300",
+            "serial": "GV300-QX-2-332.9"
+          },
+          "SIM": {
+            "name": "Umniah SIM C3",
+            "size": "256 KB"
+          },
+          "fleet": "Z55",
+          "status": "maintenance"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Afternoon Shift",
+      "startDate": "2025-07-23 20:30:45",
+      "endDate": "2025-07-24 00:30:45",
+      "trips": [
+        {
+          "id": "4",
+          "vehicle": "vehicle004",
+          "plateNum": "22-54321",
+          "odometer": "45200 KM",
+          "GPS": "6 Nov 2024 09:00:00",
+          "device": {
+            "name": "Teltonika FMB920",
+            "serial": "FMB920-X01-9-092.2"
+          },
+          "SIM": {
+            "name": "Zain SIM A2",
+            "size": "128 KB"
+          },
+          "fleet": "B77",
+          "status": "active"
+        },
+        {
+          "id": "5",
+          "vehicle": "vehicle005",
+          "plateNum": "88-99999",
+          "odometer": "99200 KM",
+          "GPS": "7 Nov 2024 17:30:00",
+          "device": {
+            "name": "Queclink GV300",
+            "serial": "GV300-QX-2-555.9"
+          },
+          "SIM": {
+            "name": "Umniah SIM D4",
+            "size": "256 KB"
+          },
+          "fleet": "Z99",
+          "status": "inactive"
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "name": "Morning Shift",
+      "startDate": "2025-07-23 07:30:45",
+      "endDate": "2025-07-23 12:30:45",
+      "trips": [
+        {
+          "id": "1",
+          "vehicle": "vehicle001",
+          "plateNum": "12-34567",
+          "odometer": "65950 KM",
+          "GPS": "3 Nov 2024 15:05:09",
+          "device": {
+            "name": "Teltonika FMB920",
+            "serial": "FMB920-C03-3-092.1"
+          },
+          "SIM": {
+            "name": "Zain SIM A1",
+            "size": "128 KB"
+          },
+          "fleet": "Q22",
+          "status": "active"
+        },
+        {
+          "id": "2",
+          "vehicle": "vehicle002",
+          "plateNum": "66-98765",
+          "odometer": "120320 KM",
+          "GPS": "4 Nov 2024 08:15:42",
+          "device": {
+            "name": "Ruptela Trace5",
+            "serial": "RT5-B12-7-001.5"
+          },
+          "SIM": {
+            "name": "Orange SIM B2",
+            "size": "64 KB"
+          },
+          "fleet": "A18",
+          "status": "inactive"
+        },
+        {
+          "id": "3",
+          "vehicle": "vehicle003",
+          "plateNum": "77-12345",
+          "odometer": "87410 KM",
+          "GPS": "5 Nov 2024 19:42:27",
+          "device": {
+            "name": "Queclink GV300",
+            "serial": "GV300-QX-2-332.9"
+          },
+          "SIM": {
+            "name": "Umniah SIM C3",
+            "size": "256 KB"
+          },
+          "fleet": "Z55",
+          "status": "maintenance"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Afternoon Shift",
+      "startDate": "2025-07-23 20:30:45",
+      "endDate": "2025-07-24 00:30:45",
+      "trips": [
+        {
+          "id": "4",
+          "vehicle": "vehicle004",
+          "plateNum": "22-54321",
+          "odometer": "45200 KM",
+          "GPS": "6 Nov 2024 09:00:00",
+          "device": {
+            "name": "Teltonika FMB920",
+            "serial": "FMB920-X01-9-092.2"
+          },
+          "SIM": {
+            "name": "Zain SIM A2",
+            "size": "128 KB"
+          },
+          "fleet": "B77",
+          "status": "active"
+        },
+        {
+          "id": "5",
+          "vehicle": "vehicle005",
+          "plateNum": "88-99999",
+          "odometer": "99200 KM",
+          "GPS": "7 Nov 2024 17:30:00",
+          "device": {
+            "name": "Queclink GV300",
+            "serial": "GV300-QX-2-555.9"
+          },
+          "SIM": {
+            "name": "Umniah SIM D4",
+            "size": "256 KB"
+          },
+          "fleet": "Z99",
+          "status": "inactive"
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "name": "Morning Shift",
+      "startDate": "2025-07-23 07:30:45",
+      "endDate": "2025-07-23 12:30:45",
+      "trips": [
+        {
+          "id": "1",
+          "vehicle": "vehicle001",
+          "plateNum": "12-34567",
+          "odometer": "65950 KM",
+          "GPS": "3 Nov 2024 15:05:09",
+          "device": {
+            "name": "Teltonika FMB920",
+            "serial": "FMB920-C03-3-092.1"
+          },
+          "SIM": {
+            "name": "Zain SIM A1",
+            "size": "128 KB"
+          },
+          "fleet": "Q22",
+          "status": "active"
+        },
+        {
+          "id": "2",
+          "vehicle": "vehicle002",
+          "plateNum": "66-98765",
+          "odometer": "120320 KM",
+          "GPS": "4 Nov 2024 08:15:42",
+          "device": {
+            "name": "Ruptela Trace5",
+            "serial": "RT5-B12-7-001.5"
+          },
+          "SIM": {
+            "name": "Orange SIM B2",
+            "size": "64 KB"
+          },
+          "fleet": "A18",
+          "status": "inactive"
+        },
+        {
+          "id": "3",
+          "vehicle": "vehicle003",
+          "plateNum": "77-12345",
+          "odometer": "87410 KM",
+          "GPS": "5 Nov 2024 19:42:27",
+          "device": {
+            "name": "Queclink GV300",
+            "serial": "GV300-QX-2-332.9"
+          },
+          "SIM": {
+            "name": "Umniah SIM C3",
+            "size": "256 KB"
+          },
+          "fleet": "Z55",
+          "status": "maintenance"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Afternoon Shift",
+      "startDate": "2025-07-23 20:30:45",
+      "endDate": "2025-07-24 00:30:45",
+      "trips": [
+        {
+          "id": "4",
+          "vehicle": "vehicle004",
+          "plateNum": "22-54321",
+          "odometer": "45200 KM",
+          "GPS": "6 Nov 2024 09:00:00",
+          "device": {
+            "name": "Teltonika FMB920",
+            "serial": "FMB920-X01-9-092.2"
+          },
+          "SIM": {
+            "name": "Zain SIM A2",
+            "size": "128 KB"
+          },
+          "fleet": "B77",
+          "status": "active"
+        },
+        {
+          "id": "5",
+          "vehicle": "vehicle005",
+          "plateNum": "88-99999",
+          "odometer": "99200 KM",
+          "GPS": "7 Nov 2024 17:30:00",
+          "device": {
+            "name": "Queclink GV300",
+            "serial": "GV300-QX-2-555.9"
+          },
+          "SIM": {
+            "name": "Umniah SIM D4",
+            "size": "256 KB"
+          },
+          "fleet": "Z99",
+          "status": "inactive"
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "name": "Morning Shift",
+      "startDate": "2025-07-23 07:30:45",
+      "endDate": "2025-07-23 12:30:45",
+      "trips": [
+        {
+          "id": "1",
+          "vehicle": "vehicle001",
+          "plateNum": "12-34567",
+          "odometer": "65950 KM",
+          "GPS": "3 Nov 2024 15:05:09",
+          "device": {
+            "name": "Teltonika FMB920",
+            "serial": "FMB920-C03-3-092.1"
+          },
+          "SIM": {
+            "name": "Zain SIM A1",
+            "size": "128 KB"
+          },
+          "fleet": "Q22",
+          "status": "active"
+        },
+        {
+          "id": "2",
+          "vehicle": "vehicle002",
+          "plateNum": "66-98765",
+          "odometer": "120320 KM",
+          "GPS": "4 Nov 2024 08:15:42",
+          "device": {
+            "name": "Ruptela Trace5",
+            "serial": "RT5-B12-7-001.5"
+          },
+          "SIM": {
+            "name": "Orange SIM B2",
+            "size": "64 KB"
+          },
+          "fleet": "A18",
+          "status": "inactive"
+        },
+        {
+          "id": "3",
+          "vehicle": "vehicle003",
+          "plateNum": "77-12345",
+          "odometer": "87410 KM",
+          "GPS": "5 Nov 2024 19:42:27",
+          "device": {
+            "name": "Queclink GV300",
+            "serial": "GV300-QX-2-332.9"
+          },
+          "SIM": {
+            "name": "Umniah SIM C3",
+            "size": "256 KB"
+          },
+          "fleet": "Z55",
+          "status": "maintenance"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Afternoon Shift",
+      "startDate": "2025-07-23 20:30:45",
+      "endDate": "2025-07-24 00:30:45",
+      "trips": [
+        {
+          "id": "4",
+          "vehicle": "vehicle004",
+          "plateNum": "22-54321",
+          "odometer": "45200 KM",
+          "GPS": "6 Nov 2024 09:00:00",
+          "device": {
+            "name": "Teltonika FMB920",
+            "serial": "FMB920-X01-9-092.2"
+          },
+          "SIM": {
+            "name": "Zain SIM A2",
+            "size": "128 KB"
+          },
+          "fleet": "B77",
+          "status": "active"
+        },
+        {
+          "id": "5",
+          "vehicle": "vehicle005",
+          "plateNum": "88-99999",
+          "odometer": "99200 KM",
+          "GPS": "7 Nov 2024 17:30:00",
+          "device": {
+            "name": "Queclink GV300",
+            "serial": "GV300-QX-2-555.9"
+          },
+          "SIM": {
+            "name": "Umniah SIM D4",
+            "size": "256 KB"
+          },
+          "fleet": "Z99",
+          "status": "inactive"
+        }
+      ]
     }
   ],
   "kpis": {

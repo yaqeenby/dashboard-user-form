@@ -23,13 +23,14 @@
       class="import-btn"
       chooseIcon="pi pi-upload"
       mode="basic"
-      accept="image/*"
+      accept=".csv"
       [maxFileSize]="1000000"
       label="Import"
       chooseLabel="Import"
       auto
       customUpload
       [chooseButtonProps]="{ severity: 'secondary' }"
+      (uploadHandler)="onCSVImport($event)"
     />
   </div>
 

@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LayoutModule } from './modules/layout/layout.module';
 import { MessageService } from 'primeng/api';
@@ -24,10 +29,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.scss',
   providers: [MessageService],
 })
-export class AppComponent {
-  constructor(public loadingService: LoadingService) {}
+export class AppComponent implements OnInit {
+  isLoading: boolean = false;
 
-  get isLoading() {
-    return this.loadingService.loading$;
+  constructor(
+    public loadingService: LoadingService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  ngOnInit(): void {
+    this.loadingService.loading$.subscribe((loading) => {
+      this.isLoading = loading;
+      this.cdr.detectChanges();
+    });
   }
 }

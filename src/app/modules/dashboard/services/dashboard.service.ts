@@ -17,4 +17,8 @@ export class DashbordService {
   getKPIs(): Observable<KPIs> {
     return this.mockApiService.get<KPIs>('/kpis');
   }
+
+  addShift(shift: Shift): Observable<Shift> {
+    return this.mockApiService.post<Shift>('/shifts', shift);
+  }
 }

@@ -19,11 +19,17 @@
       label="Export"
       (click)="export()"
     />
-    <p-button
-      class="export-btn"
-      icon="pi pi-download"
-      label="Export"
-      (click)="export()"
+    <p-fileUpload
+      class="import-btn"
+      chooseIcon="pi pi-upload"
+      mode="basic"
+      accept=".csv"
+      [maxFileSize]="1000000"
+      label="Import"
+      chooseLabel="Import"
+      auto
+      customUpload
+      [chooseButtonProps]="{ severity: 'secondary' }"
     />
   </div>
   <p-table

@@ -28,7 +28,15 @@ Angular application with a dashboard and a user creation.
 - No CSS framework (like Bootstrap or Tailwind) was specified in the instructions, so I implemented the required styles manually using SCSS for full control and customization.
 
 - Assumed API returns paginated responses
-- ***
+
+## 📌 Important Note
+
+Since the business requirements did not specify data validation for import functionality, this implementation handles only CSV import without validating the file content.
+
+The CSV import accepts the file as-is without validating the content fields.
+
+For testing, a sample CSV file is included at:
+src/assets/samples/shifts.csv
 
 ## 📦 Setup Instructions
 

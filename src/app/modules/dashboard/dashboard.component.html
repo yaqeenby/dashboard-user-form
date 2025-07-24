@@ -20,6 +20,7 @@
         [showSearchAndActions]="!!first"
         stateKey="shift-history-one"
         [searchControl]="searchControl"
+        (onExportData)="reloadShifts()"
       ></app-shifts-history>
 
       <hr *ngIf="!last" class="divider" />
