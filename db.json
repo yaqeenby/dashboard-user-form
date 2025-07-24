@@ -6,83 +6,66 @@
       "startDate": "2025-07-23 7:30:45",
       "endDate": "2025-07-23 12:30:45",
       "trips": [
-          {
+        {
           "id": "1",
           "vehicle": "vehicle001",
-          "plateNum": "04:23",
+          "plateNum": "12-34567",
           "odometer": "65,950 KM",
           "GPS": "3 Nov 2024 15:05:09",
           "device": {
-            "name": "Teltonika",
-            "serial": "C03-3-092.1"
+            "name": "Teltonika FMB920",
+            "serial": "FMB920-C03-3-092.1"
           },
           "SIM": {
-             "name": "sim 11",
-             "size": "22 kb"
+            "name": "Zain SIM A1",
+            "size": "128 KB"
           },
           "fleet": "Q22",
           "status": "active"
         },
-         {
-          "id": "1",
-          "vehicle": "vehicle001",
-          "plateNum": "04:23",
-          "odometer": "65,950 KM",
-          "GPS": "3 Nov 2024 15:05:09",
+        {
+          "id": "2",
+          "vehicle": "vehicle002",
+          "plateNum": "66-98765",
+          "odometer": "120,320 KM",
+          "GPS": "4 Nov 2024 08:15:42",
           "device": {
-            "name": "Teltonika",
-            "serial": "C03-3-092.1"
+            "name": "Ruptela Trace5",
+            "serial": "RT5-B12-7-001.5"
           },
           "SIM": {
-             "name": "sim 11",
-             "size": "22 kb"
+            "name": "Orange SIM B2",
+            "size": "64 KB"
           },
-          "fleet": "Q22",
-          "status": "active"
+          "fleet": "A18",
+          "status": "inactive"
         },
-         {
-          "id": "1",
-          "vehicle": "vehicle001",
-          "plateNum": "04:23",
-          "odometer": "65,950 KM",
-          "GPS": "3 Nov 2024 15:05:09",
+        {
+          "id": "3",
+          "vehicle": "vehicle003",
+          "plateNum": "77-12345",
+          "odometer": "87,410 KM",
+          "GPS": "5 Nov 2024 19:42:27",
           "device": {
-            "name": "Teltonika",
-            "serial": "C03-3-092.1"
+            "name": "Queclink GV300",
+            "serial": "GV300-QX-2-332.9"
           },
           "SIM": {
-             "name": "sim 11",
-             "size": "22 kb"
+            "name": "Umniah SIM C3",
+            "size": "256 KB"
           },
-          "fleet": "Q22",
-          "status": "active"
-        },
-         {
-          "id": "1",
-          "vehicle": "vehicle001",
-          "plateNum": "04:23",
-          "odometer": "65,950 KM",
-          "GPS": "3 Nov 2024 15:05:09",
-          "device": {
-            "name": "Teltonika",
-            "serial": "C03-3-092.1"
-          },
-          "SIM": {
-             "name": "sim 11",
-             "size": "22 kb"
-          },
-          "fleet": "Q22",
-          "status": "active"
+          "fleet": "Z55",
+          "status": "maintenance"
         }
       ]
     },
-      {
+    {
       "id": "2",
       "name": "Afternoon Shift",
       "startDate": "2025-07-23 20:30:45",
       "endDate": "2025-07-23 00:30:45",
       "trips": [
-          {
+        {
           "id": "1",
           "vehicle": "vehicle001",
           "plateNum": "04:23",
@@ -93,13 +76,13 @@
             "serial": "C03-3-092.1"
           },
           "SIM": {
-             "name": "sim 11",
-             "size": "22 kb"
+            "name": "sim 11",
+            "size": "22 kb"
           },
           "fleet": "Q22",
           "status": "active"
         },
-         {
+        {
           "id": "1",
           "vehicle": "vehicle001",
           "plateNum": "04:23",
@@ -110,13 +93,13 @@
             "serial": "C03-3-092.1"
           },
           "SIM": {
-             "name": "sim 11",
-             "size": "22 kb"
+            "name": "sim 11",
+            "size": "22 kb"
           },
           "fleet": "Q22",
           "status": "active"
         },
-         {
+        {
           "id": "1",
           "vehicle": "vehicle001",
           "plateNum": "04:23",
@@ -127,13 +110,13 @@
             "serial": "C03-3-092.1"
           },
           "SIM": {
-             "name": "sim 11",
-             "size": "22 kb"
+            "name": "sim 11",
+            "size": "22 kb"
           },
           "fleet": "Q22",
           "status": "active"
         },
-         {
+        {
           "id": "1",
           "vehicle": "vehicle001",
           "plateNum": "04:23",
@@ -144,8 +127,8 @@
             "serial": "C03-3-092.1"
           },
           "SIM": {
-             "name": "sim 11",
-             "size": "22 kb"
+            "name": "sim 11",
+            "size": "22 kb"
           },
           "fleet": "Q22",
           "status": "active"
@@ -155,43 +138,149 @@
   ],
   "kpis": {
     "activeTrips": {
-             "value": 380,
-             "total": 402,
-             "label": "Active Trips"
-     },
+      "value": 380,
+      "total": 402,
+      "label": "Active Trips"
+    },
     "activeVehicles": {
       "value": 375,
       "total": 500,
       "label": "Active Vehicles"
-     },
+    },
     "underMaintenance": {
       "value": 16,
       "total": 20,
       "label": "Under Maintenance"
-     },
+    },
     "inActiveTrips": {
       "value": 2,
       "label": "In-Active Trips"
-     }, 
+    },
     "stoppedVehicles": {
       "value": 100,
       "label": "Stopped Vehicles"
-     },    
+    },
     "queueMaintenance": {
       "value": 4,
       "label": "Queue Maintenance"
-     },   
+    },
     "totalDepartments": {
       "value": 7,
       "label": "Total Departments"
-     }, 
+    },
     "totalFleets": {
       "value": 60,
       "label": "Total Fleets"
-     }, 
+    },
     "totalDrivers": {
       "value": 300,
       "label": "Total Drivers"
-     }
-  }
+    }
+  },
+  "users": [
+    {
+      "firstName": "Yaqeen",
+      "middleName": "",
+      "lastName": "Baniyounes",
+      "email": "yaqeen@email.com",
+      "phone": "962778884433",
+      "enableRfid": true,
+      "rfid": "324234",
+      "role": "Admin",
+      "department": "IT",
+      "fleet": "Q22",
+      "id": "5505"
+    },
+    {
+      "id": "d548",
+      "firstName": "as",
+      "middleName": "asd",
+      "lastName": "asdasd",
+      "email": "yaqeen@sadq.sa",
+      "phone": "+962 7780-9359",
+      "enableRfid": false,
+      "rfid": "sss",
+      "role": "Admin",
+      "department": "IT",
+      "fleet": "asdasd"
+    },
+    {
+      "id": "9b9a",
+      "firstName": "as",
+      "middleName": "asd",
+      "lastName": "asdasd",
+      "email": "yaqeen@sadq.sa",
+      "phone": "+962 7780-9359",
+      "enableRfid": true,
+      "rfid": "sss",
+      "role": "Admin",
+      "department": "IT",
+      "fleet": "asdasd"
+    },
+    {
+      "id": "7627",
+      "firstName": "asd",
+      "middleName": "asd",
+      "lastName": "asdas",
+      "email": "yaqeen@sadq.sa",
+      "phone": "+962 7780-9359",
+      "enableRfid": false,
+      "rfid": "sss",
+      "role": "Admin",
+      "department": "IT",
+      "fleet": "asdasd"
+    },
+    {
+      "id": "0315",
+      "firstName": "asd",
+      "middleName": "asd",
+      "lastName": "asdas",
+      "email": "yaqeen@sadq.sa",
+      "phone": "+962 7780-9359",
+      "enableRfid": false,
+      "rfid": "sss",
+      "role": "Admin",
+      "department": "IT",
+      "fleet": "asdasd"
+    },
+    {
+      "id": "d320",
+      "firstName": "asd",
+      "middleName": "asd",
+      "lastName": "asdas",
+      "email": "yaqeen@sadq.sa",
+      "phone": "+962 7780-9359",
+      "enableRfid": false,
+      "rfid": "sss",
+      "role": "Admin",
+      "department": "IT",
+      "fleet": "asdasd"
+    },
+    {
+      "id": "087f",
+      "firstName": "asd2",
+      "middleName": "asd2",
+      "lastName": "asdas2",
+      "email": "yaqeen2@sadq.sa",
+      "phone": "+962 7780-9359",
+      "enableRfid": false,
+      "rfid": "sss2",
+      "role": "Admin",
+      "department": "IT",
+      "fleet": "asdasd"
+    },
+    {
+      "id": "edc7",
+      "firstName": "asd",
+      "middleName": "asd",
+      "lastName": "asdas",
+      "email": "yaqeen@sadq.sa",
+      "phone": "+962 7780-9359",
+      "enableRfid": false,
+      "rfid": "sss",
+      "role": "Manager",
+      "department": "HR",
+      "fleet": "asdasd"
+    }
+  ]
 }

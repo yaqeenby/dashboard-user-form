@@ -1,6 +1,15 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Table } from 'primeng/table';
 import { Shift } from '../../../../types/shift.type';
+import { FormControl } from '@angular/forms';
+import { TableColumn } from '../../../shared/types/table-column.type';
 
 @Component({
   selector: 'app-shifts-history',
@@ -13,8 +22,9 @@ export class ShiftsHistoryComponent implements OnInit {
   @Input() shift: Shift | null = null;
   @Input() showSearchAndActions: boolean = false;
   @Input() stateKey: string = '';
+  @Input() searchControl!: FormControl;
 
-  columns = [
+  columns: TableColumn[] = [
     { field: 'vehicle', header: 'Vehicle', sortable: true, visible: true },
     { field: 'plateNum', header: 'PlateNum', sortable: true, visible: true },
     { field: 'odometer', header: 'Odometer', visible: true },
@@ -46,7 +56,9 @@ export class ShiftsHistoryComponent implements OnInit {
   tableStyle = { 'min-width': '50rem' };
   dataKey: string = 'id';
 
-  selectedColumns: any[] = [];
+  selectedColumns: TableColumn[] = [];
+
+  @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit() {
     if (this.stateKey && localStorage) {

@@ -15,9 +15,11 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Fluid } from 'primeng/fluid';
 import { ButtonModule } from 'primeng/button';
+import { UsersListComponent } from './users-list/users-list.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
-  declarations: [UsersComponent, AddUserComponent],
+  declarations: [UsersComponent, AddUserComponent, UsersListComponent],
   imports: [
     RouterModule,
     CommonModule,
@@ -33,6 +35,7 @@ import { ButtonModule } from 'primeng/button';
     InputMaskModule,
     Fluid,
     ButtonModule,
+    SharedModule,
   ],
   providers: [MessageService],
   bootstrap: [UsersComponent],

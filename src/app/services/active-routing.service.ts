@@ -58,6 +58,8 @@ export class ActiveRoutingService {
           command: () => {
             {
               this.activeRoute = ActiveRouting.Users;
+              this.activeRouteChanged.emit(this.activeRoute);
+              this.router.navigate(['/organization/users/list']);
             }
           },
           isChild: true,

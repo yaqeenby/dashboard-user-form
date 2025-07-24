@@ -1,0 +1,26 @@
+@use "variables" as *;
+
+.header {
+  border-bottom: $space-1 solid $borders;
+  padding-bottom: $space-15;
+  color: $text-prim;
+  font-size: $font-14;
+  margin-bottom: $space-30;
+
+  .title {
+    font-weight: 700;
+  }
+
+  img {
+    width: 2rem;
+  }
+
+  ::ng-deep .p-button {
+    border-radius: $space-10;
+    background-color: $Com-success-2 !important;
+    border-color: $Com-success-2 !important;
+    padding: $space-10 $space-15;
+    font-size: $font-14;
+    color: $btn-prim-text-click-focus;
+  }
+}

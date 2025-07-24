@@ -4,10 +4,15 @@
       <p-inputicon>
         <i class="pi pi-search"></i>
       </p-inputicon>
-      <input pInputText #search type="text" placeholder="Search" />
+      <input
+        pInputText
+        #search
+        type="text"
+        placeholder="Search"
+        (input)="dataTable.filterGlobal(search.value, 'contains')"
+      />
+      <!-- [value]="dataTable.filters['global']?.value" -->
     </p-iconfield>
-    <!-- [value]="dt1.filters['global']?.value"
-      (input)="dt1.filterGlobal($event.target.value, 'contains')" -->
     <p-button
       class="export-btn"
       icon="pi pi-download"
@@ -24,12 +29,12 @@
   <p-table
     #dataTable
     [value]="value"
-    [columns]="columns"
+    [columns]="selectedColumns"
     [globalFilterFields]="globalFilterFields"
     [dataKey]="dataKey"
     [tableStyle]="tableStyle"
     stateStorage="local"
-    stateKey="generic-state-key"
+    [stateKey]="stateKey"
     [reorderableColumns]="true"
     (onColReorder)="onColReorder($event)"
   >
@@ -42,27 +47,37 @@
     <ng-template pTemplate="header">
       <tr>
         <th
-          *ngFor="let col of columns"
+          *ngFor="let col of selectedColumns; let last = last"
           [pSortableColumn]="col.sortable ? col.field : ''"
           pReorderableColumn
         >
-          <div class="d-flex align-items-center gap-5">
-            <svg
-              width="8"
-              height="12"
-              viewBox="0 0 8 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M3.33335 10.2621C3.33335 10.9954 2.73335 11.5954 2.00002 11.5954C1.26669 11.5954 0.666687 10.9954 0.666687 10.2621C0.666687 9.52877 1.26669 8.92877 2.00002 8.92877C2.73335 8.92877 3.33335 9.52877 3.33335 10.2621ZM2.00002 4.92877C1.26669 4.92877 0.666687 5.52877 0.666687 6.2621C0.666687 6.99544 1.26669 7.59544 2.00002 7.59544C2.73335 7.59544 3.33335 6.99544 3.33335 6.2621C3.33335 5.52877 2.73335 4.92877 2.00002 4.92877ZM2.00002 0.928772C1.26669 0.928772 0.666687 1.52877 0.666687 2.26211C0.666687 2.99544 1.26669 3.59544 2.00002 3.59544C2.73335 3.59544 3.33335 2.99544 3.33335 2.26211C3.33335 1.52877 2.73335 0.928772 2.00002 0.928772ZM6.00002 3.59544C6.73335 3.59544 7.33335 2.99544 7.33335 2.26211C7.33335 1.52877 6.73335 0.928772 6.00002 0.928772C5.26669 0.928772 4.66669 1.52877 4.66669 2.26211C4.66669 2.99544 5.26669 3.59544 6.00002 3.59544ZM6.00002 4.92877C5.26669 4.92877 4.66669 5.52877 4.66669 6.2621C4.66669 6.99544 5.26669 7.59544 6.00002 7.59544C6.73335 7.59544 7.33335 6.99544 7.33335 6.2621C7.33335 5.52877 6.73335 4.92877 6.00002 4.92877ZM6.00002 8.92877C5.26669 8.92877 4.66669 9.52877 4.66669 10.2621C4.66669 10.9954 5.26669 11.5954 6.00002 11.5954C6.73335 11.5954 7.33335 10.9954 7.33335 10.2621C7.33335 9.52877 6.73335 8.92877 6.00002 8.92877Z"
-                fill="#464353"
-              />
-            </svg>
+          <div class="d-flex align-items-center justify-content-between gap-5">
+            <div class="d-flex align-items-center gap-5">
+              <svg
+                width="8"
+                height="12"
+                viewBox="0 0 8 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3.33335 10.2621C3.33335 10.9954 2.73335 11.5954 2.00002 11.5954C1.26669 11.5954 0.666687 10.9954 0.666687 10.2621C0.666687 9.52877 1.26669 8.92877 2.00002 8.92877C2.73335 8.92877 3.33335 9.52877 3.33335 10.2621ZM2.00002 4.92877C1.26669 4.92877 0.666687 5.52877 0.666687 6.2621C0.666687 6.99544 1.26669 7.59544 2.00002 7.59544C2.73335 7.59544 3.33335 6.99544 3.33335 6.2621C3.33335 5.52877 2.73335 4.92877 2.00002 4.92877ZM2.00002 0.928772C1.26669 0.928772 0.666687 1.52877 0.666687 2.26211C0.666687 2.99544 1.26669 3.59544 2.00002 3.59544C2.73335 3.59544 3.33335 2.99544 3.33335 2.26211C3.33335 1.52877 2.73335 0.928772 2.00002 0.928772ZM6.00002 3.59544C6.73335 3.59544 7.33335 2.99544 7.33335 2.26211C7.33335 1.52877 6.73335 0.928772 6.00002 0.928772C5.26669 0.928772 4.66669 1.52877 4.66669 2.26211C4.66669 2.99544 5.26669 3.59544 6.00002 3.59544ZM6.00002 4.92877C5.26669 4.92877 4.66669 5.52877 4.66669 6.2621C4.66669 6.99544 5.26669 7.59544 6.00002 7.59544C6.73335 7.59544 7.33335 6.99544 7.33335 6.2621C7.33335 5.52877 6.73335 4.92877 6.00002 4.92877ZM6.00002 8.92877C5.26669 8.92877 4.66669 9.52877 4.66669 10.2621C4.66669 10.9954 5.26669 11.5954 6.00002 11.5954C6.73335 11.5954 7.33335 10.9954 7.33335 10.2621C7.33335 9.52877 6.73335 8.92877 6.00002 8.92877Z"
+                  fill="#464353"
+                />
+              </svg>
 
-            {{ col.header }}
+              {{ col.header }}
 
-            <p-sortIcon *ngIf="col.sortable" [field]="col.field"> </p-sortIcon>
+              <p-sortIcon *ngIf="col.sortable" [field]="col.field">
+              </p-sortIcon>
+            </div>
+
+            <app-table-columns-plus
+              *ngIf="last"
+              [columns]="columns"
+              [selectedColumns]="selectedColumns"
+              (onChange)="selectedColumns = $event"
+            ></app-table-columns-plus>
           </div>
         </th>
       </tr>
@@ -79,7 +94,7 @@
     <!-- Empty -->
     <ng-template #emptymessage>
       <tr>
-        <td [attr.colspan]="columns.length">No records found.</td>
+        <td [attr.colspan]="selectedColumns.length">No records found.</td>
       </tr>
     </ng-template>
   </p-table>

@@ -1,10 +1,10 @@
-@use "../../../../../src/styles/variables" as *;
+@use "variables" as *;
 @use "sass:color";
 
 .menu-item {
   display: flex;
   align-items: center;
-  border-radius: 10px;
+  border-radius: $space-10;
   cursor: pointer;
 
   .icon {
@@ -33,117 +33,117 @@
   }
 
   &.big {
-    padding: 5px 15px;
-    gap: 20px;
+    padding: $space-5 $space-15;
+    gap: $space-20;
     flex-direction: row;
 
     .icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
+      width: $space-32;
+      height: $space-32;
+      border-radius: $space-10;
 
       img {
-        width: 26.67px;
-        height: 26.67px;
+        width: $space-26-7;
+        height: $space-26-7;
       }
     }
 
     .label {
-      font-size: 12px;
+      font-size: $font-12;
     }
   }
 
   &.small {
-    gap: 10px;
+    gap: $space-10;
     flex-direction: column;
-    height: 96px;
+    height: $space-96;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: $space-8;
 
     .icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 15px;
+      width: $space-48;
+      height: $space-48;
+      border-radius: $space-15;
 
       img {
-        width: 32px;
-        height: 32px;
+        width: $space-32;
+        height: $space-32;
       }
     }
 
     .label {
-      font-size: 12px;
+      font-size: $font-12;
     }
 
     &.child {
-      padding: 5px 15px;
-      gap: 20px;
+      padding: $space-5 $space-15;
+      gap: $space-20;
       flex-direction: row;
       justify-content: unset;
       height: unset;
 
       .icon {
-        width: 32px;
-        height: 32px;
-        border-radius: 10px;
+        width: $space-32;
+        height: $space-32;
+        border-radius: $space-10;
 
         img {
-          width: 26.67px;
-          height: 26.67px;
+          width: $space-26-7;
+          height: $space-26-7;
         }
       }
 
       .label {
-        font-size: 12px;
+        font-size: $font-12;
       }
     }
   }
 
   &.mobile {
-    padding: 5px 15px;
-    gap: 20px;
+    padding: $space-5 $space-15;
+    gap: $space-20;
     flex-direction: row;
 
     .icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
+      width: $space-32;
+      height: $space-32;
+      border-radius: $space-10;
 
       img {
-        width: 26.67px;
-        height: 26.67px;
+        width: $space-26-7;
+        height: $space-26-7;
       }
     }
 
     .label {
-      font-size: 13px;
+      font-size: $font-13;
     }
   }
 
   &.shortcut {
-    padding: 10px 0;
-    gap: 5px;
+    padding: $space-10 0;
+    gap: $space-5;
     flex-direction: row;
 
     .icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 15px;
+      width: $space-48;
+      height: $space-48;
+      border-radius: $space-15;
 
       img {
-        width: 32px;
-        height: 32px;
+        width: $space-32;
+        height: $space-32;
       }
     }
 
     .label {
-      font-size: 12px;
+      font-size: $font-12;
     }
   }
 
   &.selected {
     .icon {
-      box-shadow: 0 1px 1px 0 #02001799;
+      box-shadow: 0 $space-1 $space-1 0 #02001799;
       background-color: $btn-nav-prim-bkg-click-focus;
 
       img {
@@ -153,7 +153,7 @@
     }
 
     .label {
-      font-size: 12px;
+      font-size: $font-12;
       font-weight: 700;
       color: $btn-nav-prim-bkg-click-focus;
     }
@@ -164,8 +164,8 @@
   // }
 
   .item-action {
-    border-radius: 8px;
-    padding: 7px;
+    border-radius: $space-8;
+    padding: $space-7;
     background-color: $primary-tint;
     display: flex;
     align-items: center;

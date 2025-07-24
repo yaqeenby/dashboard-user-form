@@ -1,4 +1,4 @@
-@use "src/styles/variables" as *;
+@use "variables" as *;
 @import "primeicons/primeicons.css";
 
 body {
@@ -24,22 +24,22 @@ body {
 }
 
 .gap-5 {
-  gap: 5px;
+  gap: $space-5;
 }
 .gap-10 {
-  gap: 10px;
+  gap: $space-10;
 }
 
 .gap-15 {
-  gap: 15px;
+  gap: $space-15;
 }
 
 .gap-20 {
-  gap: 20px;
+  gap: $space-20;
 }
 
 .gap-30 {
-  gap: 30px;
+  gap: $space-30;
 }
 
 .align-items-center {
@@ -72,12 +72,12 @@ body {
 
 .p-inputtext {
   background-color: $primary-contrast !important;
-  border-radius: 10px !important;
-  padding-right: 5px;
-  padding-left: 5px;
+  border-radius: $space-10 !important;
+  padding-right: $space-5;
+  padding-left: $space-5;
   border-color: $primary-contrast !important;
   color: $text-light !important;
-  font-size: 14px;
+  font-size: $font-14;
 }
 
 .ml-auto {
@@ -95,7 +95,7 @@ body {
 .table {
   .p-datatable .p-datatable-tbody > tr {
     background-color: transparent;
-    font-size: 14px;
+    font-size: $font-14;
     color: $text-prim;
   }
 
@@ -108,14 +108,14 @@ body {
   }
 
   .p-datatable-tbody > tr > td {
-    padding: 15px;
+    padding: $space-15;
     white-space: nowrap;
   }
 
   .p-datatable-thead > tr > th {
     background-color: $primary-bg !important;
     color: $text-sec !important;
-    font-size: 14px;
+    font-size: $font-14;
     border-color: $borders !important;
   }
 
@@ -123,36 +123,36 @@ body {
     background-color: transparent !important;
     border: none !important;
     padding: 0 !important;
-    margin-bottom: 20px;
+    margin-bottom: $space-20;
   }
 
   .table-title {
-    font-size: 14px;
+    font-size: $font-14;
     font-weight: 700;
     color: $text-prim;
   }
 
   .table-description {
-    font-size: 14px;
+    font-size: $font-14;
     color: $text-prim;
   }
 
   .p-inputtext {
     width: 100%;
-    font-size: 14px;
+    font-size: $font-14;
     color: $text-light;
   }
 
   .p-iconfield .p-inputicon:first-child {
-    inset-inline-start: 15px !important;
+    inset-inline-start: $space-15 !important;
     .pi {
-      font-size: 19px;
+      font-size: $font-19;
     }
   }
 
   .p-iconfield .p-inputtext:not(:first-child),
   .p-iconfield .p-inputwrapper:not(:first-child) .p-inputtext {
-    padding-inline-start: 55px !important;
+    padding-inline-start: $space-55 !important;
   }
 
   .p-inputicon {
@@ -164,23 +164,23 @@ body {
     .p-button {
       background-color: $btn-prim-bkg !important;
       border-color: $btn-prim-bkg !important;
-      box-shadow: 0 1px 1px 0 #02001799;
+      box-shadow: 0 $space-1 $space-1 0 #02001799;
       color: $text-prim;
-      font-size: 14px;
-      padding-right: 16px;
+      font-size: $font-14;
+      padding-right: $space-16;
       padding-left: 0;
       gap: 0;
 
       .pi {
-        width: 40px;
-        font-size: 12px !important;
+        width: $space-40;
+        font-size: $font-12 !important;
       }
 
       plusicon {
-        width: 40px;
+        width: $space-40;
 
         svg {
-          font-size: 12px !important;
+          font-size: $font-12 !important;
         }
       }
 
@@ -192,18 +192,18 @@ body {
 
   .p-button-outlined.p-button-contrast {
     flex-direction: row-reverse;
-    padding: 5px;
+    padding: $space-5;
     color: $text-prim;
-    border: 1px solid $prim-shade;
-    font-size: 14px;
+    border: $space-1 solid $prim-shade;
+    font-size: $font-14;
   }
 
   .columns-plus {
     background-color: $btn-prim-bkg;
-    box-shadow: 0 1px 1px 0 #02001799;
-    border-radius: 10px;
-    width: 40px;
-    height: 40px;
+    box-shadow: 0 $space-1 $space-1 0 #02001799;
+    border-radius: $space-10;
+    width: $space-40;
+    height: $space-40;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -213,15 +213,15 @@ body {
     }
 
     .p-multiselect-dropdown {
-      width: 40px;
-      height: 40px;
+      width: $space-40;
+      height: $space-40;
     }
     .p-multiselect-label {
       display: none;
     }
     .p-multiselect-dropdown {
       background-color: $btn-prim-bkg;
-      border-radius: 10px;
+      border-radius: $space-10;
       opacity: 0;
     }
 
@@ -236,7 +236,7 @@ body {
       background-image: "./assets/icons/invoice.svg";
     }
 
-    svg {
+    .col-plus-icon {
       position: absolute;
       z-index: 1;
     }
@@ -261,7 +261,7 @@ body {
 
     .p-multiselect-list {
       li {
-        font-size: 13px;
+        font-size: $font-13;
         color: $text-prim;
 
         .p-checkbox-checked .p-checkbox-box {
@@ -276,9 +276,9 @@ body {
     sortalticon,
     sortamountdownicon,
     sortamountupalticon {
-      width: 25px;
+      width: $space-25;
       svg {
-        height: 12px;
+        height: $space-12;
 
         path {
           fill: $borders;
@@ -289,18 +289,18 @@ body {
 
   .p-datatable-table-container {
     &::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
+      width: $space-4;
+      height: $space-2;
     }
 
     &::-webkit-scrollbar-track {
       background: $borders;
-      border-radius: 10px;
+      border-radius: $space-10;
     }
 
     &::-webkit-scrollbar-thumb {
       background: $primary-bg-deep;
-      border-radius: 10px;
+      border-radius: $space-10;
       transition: background 0.3s ease;
     }
 
@@ -310,12 +310,12 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $screen-md) {
   .table {
     .export-btn,
     .import-btn {
       .p-button {
-        padding-right: 0px !important;
+        padding-right: 0 !important;
         .p-button-label {
           display: none;
         }

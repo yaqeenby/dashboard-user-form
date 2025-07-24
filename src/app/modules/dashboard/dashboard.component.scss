@@ -1,31 +1,37 @@
-@use "../../../src/styles/variables" as *;
+@use "variables" as *;
 @use "sass:color";
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
+  gap: $space-10;
+}
 
 .tables-container {
   .divider {
     border: none;
-    height: 1px;
+    height: $space-1;
     width: 100%;
     background: #000;
     margin: 0;
     background: repeating-linear-gradient(
       90deg,
       $borders,
-      $borders 4px,
-      transparent 4px,
-      transparent 12px
+      $borders $space-4,
+      transparent $space-4,
+      transparent $space-12
     );
   }
 
-  gap: 60px;
+  gap: $space-60;
 }
 
 .dashboard-gap {
-  gap: 30px;
+  gap: $space-30;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $screen-md) {
   .dashboard-gap {
-    gap: 60px;
+    gap: $space-60;
   }
 }

@@ -10,6 +10,7 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
 import { MenuModule } from 'primeng/menu';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { RippleModule } from 'primeng/ripple';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [LayoutComponent, SidebarMenuItemComponent],
@@ -25,5 +26,6 @@ import { RippleModule } from 'primeng/ripple';
     RippleModule,
   ],
   bootstrap: [LayoutComponent],
+  providers: [MessageService],
 })
 export class LayoutModule {}

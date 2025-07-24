@@ -1,4 +1,4 @@
-@use "../../../src/styles/variables" as *;
+@use "variables" as *;
 
 .layout {
   display: flex;
@@ -8,14 +8,14 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding-top: 20px;
+    padding-top: $space-20;
 
     ::ng-deep {
       .p-panelmenu-panel {
         background-color: transparent !important;
         border: none !important;
-        padding: 2px 10px !important;
-        border-radius: 4px !important;
+        padding: $space-2 $space-10 !important;
+        border-radius: $space-4 !important;
       }
 
       .p-panelmenu-header-content:hover {
@@ -30,9 +30,9 @@
       }
 
       .p-panelmenu-submenu {
-        border-radius: 8px !important;
-        padding: 2px 10px !important;
-        padding-left: 35px !important;
+        border-radius: $space-8 !important;
+        padding: $space-2 $space-10 !important;
+        padding-left: $space-35 !important;
       }
 
       .p-tieredmenu {
@@ -73,8 +73,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 30px 0;
-    box-shadow: 16px 0 30px 0 rgb(0, 0, 0, 0.2);
+    padding: $space-30 0;
+    box-shadow: $space-16 0 $space-30 0 rgb(0, 0, 0, 0.2);
 
     .toggle-btn {
       ::ng-deep .p-button-icon-only {
@@ -85,8 +85,8 @@
         border-radius: 0;
         border: none;
         background-color: $primary-bg;
-        padding: 6px;
-        font-size: 18px;
+        padding: $space-6;
+        font-size: $font-18;
         color: $text-sec;
       }
 
@@ -100,11 +100,11 @@
     }
 
     .logo {
-      width: 64px;
+      width: $space-64;
     }
 
     &.collapsed {
-      width: 96px;
+      width: $space-96;
       .menu-container {
         justify-content: center;
       }
@@ -117,16 +117,16 @@
   .mobile-header {
     display: none;
     background: $primary-bg-deep;
-    padding: 15px;
-    box-shadow: 0 16px 30px 0 rgba(0, 0, 0, 0.3);
-    border-right: 2px solid $primary-bg-deep;
+    padding: $space-15;
+    box-shadow: 0 $space-16 $space-30 0 rgba(0, 0, 0, 0.3);
+    border-right: $space-2 solid $primary-bg-deep;
 
     button {
       color: #fff;
     }
 
     .logo {
-      width: 64px;
+      width: $space-64;
     }
 
     .user {
@@ -142,7 +142,7 @@
         padding: 0;
 
         .pi {
-          font-size: 19px;
+          font-size: $font-19;
           color: $text-sec;
         }
       }
@@ -159,56 +159,56 @@
     height: 0;
     overflow: hidden;
     background: $primary-bg-deep;
-    box-shadow: 0 16px 30px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 $space-16 $space-30 0 rgba(0, 0, 0, 0.3);
     transition: height 0.3s ease;
     z-index: 1001;
-    gap: 20px;
+    gap: $space-20;
 
     .logo {
-      width: 64px;
+      width: $space-64;
     }
 
     &.open {
-      padding: 25px;
-      border-radius: 15px;
+      padding: $space-25;
+      border-radius: $space-15;
       height: 600px;
       max-height: fit-content;
     }
 
     .sidebar-content {
-      padding: 1rem;
+      padding: $space-16;
     }
 
     ::ng-deep {
       .p-panelmenu {
-        gap: 20px;
+        gap: $space-20;
       }
 
       .p-panelmenu-submenu {
-        gap: 20px;
+        gap: $space-20;
         display: flex;
         flex-direction: column;
-        padding-top: 20px !important;
+        padding-top: $space-20 !important;
       }
     }
 
     .close-btn {
       ::ng-deep .p-button {
         color: $text-sec;
-        font-size: 16px;
+        font-size: $font-16;
         background-color: transparent;
         padding: 0;
         border: 0;
 
         .pi {
-          font-size: 16px;
+          font-size: $font-16;
           color: $text-sec;
         }
       }
     }
 
     .user {
-      height: 98px;
+      height: $space-98;
       display: flex;
       align-items: end;
     }
@@ -226,13 +226,13 @@
 
   .content {
     flex: 1;
-    padding: 20px 30px;
+    padding: $space-20 $space-30;
     transition: margin-left 0.3s ease;
     overflow: hidden;
     overflow-y: auto;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: $screen-md) {
     flex-direction: column;
 
     .sidebar {
@@ -246,21 +246,21 @@
 }
 
 .user {
-  gap: 15px;
-  padding: 0 15px;
+  gap: $space-15;
+  padding: 0 $space-15;
   color: $text-prim;
-  font-size: 14px;
+  font-size: $font-14;
 
   .user-name {
     font-weight: 700;
   }
 
   .user-img {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    min-height: 40px;
-    border: 2px solid $btn-nav-prim-modals;
-    border-radius: 15px;
+    width: $space-40;
+    height: $space-40;
+    min-width: $space-40;
+    min-height: $space-40;
+    border: $space-2 solid $btn-nav-prim-modals;
+    border-radius: $space-15;
   }
 }

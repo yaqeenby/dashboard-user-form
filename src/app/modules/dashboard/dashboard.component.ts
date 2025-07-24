@@ -1,8 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DashbordService } from './services/dashboard.service';
 import { Shift } from '../../types/shift.type';
 import { error } from 'console';
 import { KPIs, KPIvalue } from './types/kpi.type';
+import { FormControl } from '@angular/forms';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  Observable,
+  Subject,
+  switchMap,
+  takeUntil,
+} from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,162 +20,79 @@ import { KPIs, KPIvalue } from './types/kpi.type';
   styleUrl: './dashboard.component.scss',
   standalone: false,
 })
-export class DashboardComponent implements OnInit {
-  value = 100;
-
-  cards: any[] = [
-    {
-      per: 100,
-      value: 390,
-      total: 400,
-      label: 'Active Trips',
-    },
-    {
-      per: 100,
-      value: 200,
-      total: 400,
-      label: 'Active Trips',
-    },
-    {
-      per: 100,
-      value: 340,
-      total: 400,
-      label: 'Active Trips',
-    },
-    {
-      value: 300,
-      label: 'Active Trips',
-    },
-    {
-      value: 300,
-      label: 'Active Trips',
-    },
-    {
-      value: 300,
-      label: 'Active Trips',
-    },
-    {
-      value: 300,
-      label: 'Active Trips',
-    },
-    {
-      value: 300,
-      label: 'Active Trips',
-    },
-    {
-      value: 300,
-      label: 'Active Trips',
-    },
-  ];
-
-  cols = [
-    { header: 'col1', field: 'code' },
-    { header: 'col1', field: 'name' },
-    { header: 'col1', field: 'category' },
-    { header: 'col1', field: 'quantity' },
-  ];
-  products = [
-    {
-      id: 1,
-      vehicle: 'ABus-9265',
-      plateNum: '04321',
-      odometer: '55,956 KM',
-      GPS: '3-Nov-2024 13:05:50',
-      device: {
-        name: 'Teltonika',
-        serial: 'C03-96321',
-      },
-      SIM: {
-        name: 'Allowance',
-        size: '1.5GB',
-      },
-      fleet: 'Q22',
-      status: 2,
-    },
-    {
-      id: 2,
-      vehicle: 'Bus-9265',
-      plateNum: '104321',
-      odometer: '55,956 KM',
-      GPS: '3-Nov-2024 13:05:50',
-      device: {
-        name: 'Teltonika',
-        serial: 'C03-96321',
-      },
-      SIM: {
-        name: 'Allowance',
-        size: '1.5GB',
-      },
-      fleet: 'Q22',
-      status: 2,
-    },
-    {
-      id: 3,
-
-      vehicle: 'CBus-9265',
-      plateNum: '204321',
-      odometer: '55,956 KM',
-      GPS: '3-Nov-2024 13:05:50',
-      device: {
-        name: 'Teltonika',
-        serial: 'C03-96321',
-      },
-      SIM: {
-        name: 'Allowance',
-        size: '1.5GB',
-      },
-      fleet: 'Q22',
-      status: 2,
-    },
-    {
-      id: 4,
-
-      vehicle: 'Bus-9265',
-      plateNum: '04321',
-      odometer: '55,956 KM',
-      GPS: '3-Nov-2024 13:05:50',
-      device: {
-        name: 'Teltonika',
-        serial: 'C03-96321',
-      },
-      SIM: {
-        name: 'Allowance',
-        size: '1.5GB',
-      },
-      fleet: 'Q22',
-      status: 2,
-    },
-  ];
-
-  items = [
-    {
-      label: 'Options',
-      items: [
-        {
-          label: 'Refresh',
-          icon: 'pi pi-refresh',
-        },
-        {
-          label: 'Export',
-          icon: 'pi pi-upload',
-        },
-      ],
-    },
-  ];
-
-  exportColumns = [{ title: 'id', dataKey: 'id' }];
-
+export class DashboardComponent implements OnInit, OnDestroy {
   loadingShifts = false;
   shifts: Shift[] = [];
 
   loadingKPIs = false;
   KPIs: KPIs | null = null;
   KPIsElements: KPIvalue[] = [];
+  searchControl = new FormControl();
+  private destroy$ = new Subject<void>();
+
   constructor(private dashbordService: DashbordService) {}
 
   ngOnInit(): void {
     this.loadKPIs();
     this.loadShifts();
+
+    this.searchControl.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap((searchText: string) => this.getFilteredShifts(searchText)),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((filtered) => {
+        this.shifts = filtered;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  loadShifts() {
+    this.loadingShifts = true;
+
+    this.getFilteredShifts().subscribe(
+      (res) => {
+        this.shifts = res;
+        this.loadingShifts = false;
+      },
+      (error) => {
+        this.loadingShifts = false;
+      }
+    );
+  }
+
+  getFilteredShifts(searchText: string = ''): Observable<any[]> {
+    return this.dashbordService
+      .getShifts()
+      .pipe(map((shifts) => this.filterShifts(shifts, searchText)));
+  }
+
+  filterShifts(shifts: Shift[], search: string): any[] {
+    if (!search) return shifts;
+    const lower = search.toLowerCase();
+
+    for (let sh of shifts) {
+      sh.trips = sh.trips.filter(
+        (trip) =>
+          trip.vehicle.toLocaleLowerCase().includes(lower) ||
+          trip.plateNum.toLocaleLowerCase().includes(lower) ||
+          trip.odometer.toLocaleLowerCase().includes(lower) ||
+          trip.GPS.toLocaleLowerCase().includes(lower) ||
+          trip.status.toLocaleLowerCase().includes(lower) ||
+          trip.fleet.toLocaleLowerCase().includes(lower) ||
+          trip.device?.name?.toLocaleLowerCase().includes(lower) ||
+          trip.device?.serial?.toLocaleLowerCase().includes(lower) ||
+          trip.SIM?.name?.toLocaleLowerCase().includes(lower)
+      );
+    }
+
+    return shifts;
   }
 
   loadKPIs() {
@@ -189,40 +116,6 @@ export class DashboardComponent implements OnInit {
         this.loadingKPIs = false;
       }
     );
-  }
-
-  loadShifts() {
-    this.loadingShifts = true;
-    this.dashbordService.getShifts().subscribe(
-      (res) => {
-        this.shifts = res;
-        this.loadingShifts = false;
-      },
-      (error) => {
-        this.loadingShifts = false;
-      }
-    );
-  }
-
-  getSeverity(status: number) {
-    switch (status) {
-      case 1:
-        return 'danger';
-
-      case 2:
-        return 'success';
-
-      case 3:
-        return 'info';
-
-      case 4:
-        return 'warn';
-
-      case 5:
-        return 'pending';
-    }
-
-    return 'pending';
   }
 
   getOpacity(index: number): number {

@@ -4,12 +4,16 @@ import { UsersComponent } from './users.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { ActiveRouteGuard } from '../../../guards/active-route.guard';
 import { ActiveRouting } from '../../../enums/active-routing.enum';
+import { UsersListComponent } from './users-list/users-list.component';
 
 const routes: Routes = [
   {
     path: '',
     component: UsersComponent,
-    children: [{ path: 'add', component: AddUserComponent }],
+    children: [
+      { path: 'list', component: UsersListComponent },
+      { path: 'add', component: AddUserComponent },
+    ],
     canMatch: [ActiveRouteGuard],
     data: { activeRoute: ActiveRouting.Users },
   },

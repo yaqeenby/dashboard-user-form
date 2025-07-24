@@ -1,21 +1,19 @@
-@use "../../../../../src/styles/variables" as *;
+@use "variables" as *;
 
 .vehicle-tag {
-  border-radius: 6px;
-  border: 1px solid $prim-shade-2;
-  padding: 0 4px;
+  border-radius: $space-6;
+  border: $space-1 solid $prim-shade-2;
+  padding: 0 $space-4;
   color: $prim-shade-2;
-  font-size: 13px;
+  font-size: $font-13;
 }
 
 .bolt {
-  box-shadow: 0 0 10px 0 $success;
+  box-shadow: 0 0 $space-10 0 $success;
 }
 
 ::ng-deep {
   .table {
-    gap: 60px;
-
     .p-datatable-thead > tr > th:first-child {
       min-width: 270px;
     }
@@ -26,7 +24,7 @@
 
     .p-datatable-tbody > tr > td:not(:first-child) {
       > div:first-child {
-        padding-left: 15px;
+        padding-left: $space-15;
       }
     }
 
@@ -35,5 +33,11 @@
         justify-content: end;
       }
     }
+  }
+}
+
+@media (max-width: $screen-md) {
+  .table {
+    gap: $space-60;
   }
 }

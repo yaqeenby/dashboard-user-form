@@ -1,12 +1,5 @@
 <div class="d-flex flex-column dashboard-gap">
-  <div
-    *ngIf="KPIs"
-    style="
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
-      gap: 20px;
-    "
-  >
+  <div *ngIf="KPIs" class="cards-container">
     <ng-container *ngFor="let elem of KPIsElements">
       <app-metric-card
         [title]="elem.label"
@@ -26,6 +19,7 @@
         [shift]="shift"
         [showSearchAndActions]="!!first"
         stateKey="shift-history-one"
+        [searchControl]="searchControl"
       ></app-shifts-history>
 
       <hr *ngIf="!last" class="divider" />

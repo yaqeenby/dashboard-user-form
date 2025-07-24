@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { UploadEvent } from 'primeng/fileupload';
-import { elementAt } from 'rxjs';
+import { UsersService } from '../services/users.service';
+import { User } from '../types/user.type';
+import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-add-user',
@@ -10,23 +13,21 @@ import { elementAt } from 'rxjs';
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.scss',
 })
-export class AddUserComponent implements OnInit {
+export class AddUserComponent implements OnInit, OnDestroy {
   userForm!: FormGroup;
-  roles = [
-    { id: 1, name: 'Admin' },
-    { id: 2, name: 'Manager' },
-  ];
+  roles = ['Admin', 'Manager'];
 
-  departments = [
-    { id: 1, name: 'IT' },
-    { id: 2, name: 'HR' },
-  ];
+  departments = ['IT', 'HR'];
 
   previewUrl: string | ArrayBuffer | null = null;
 
+  private destroy$ = new Subject<void>();
+
   constructor(
     private messageService: MessageService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private usersService: UsersService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +51,11 @@ export class AddUserComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   onBasicUploadAuto(event: UploadEvent) {
     this.messageService.add({
       severity: 'info',
@@ -69,14 +75,38 @@ export class AddUserComponent implements OnInit {
   }
 
   submit() {
+    console.log(this.userForm);
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
       return;
     }
 
-    let data = this.userForm.getRawValue();
-    //handle user image
-    //add user logic
+    let data: User = this.userForm.getRawValue();
+
+    this.usersService
+      .addUser(data)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'User Added Successfully',
+          });
+
+          setTimeout(() => {
+            this.router.navigate(['/organization/users/list']);
+          }, 500);
+        },
+        error: () => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Something Went Wrong',
+          });
+        },
+      });
   }
 
   cancel() {
