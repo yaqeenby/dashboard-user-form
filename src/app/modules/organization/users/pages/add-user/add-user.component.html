@@ -53,14 +53,14 @@
   >
     <div class="gap-10 user-fullname w-100">
       <div class="d-flex flex-column gap-5">
-        <label for="username" class="field-label required"
+        <label for="firstName" class="field-label required"
           >First Name<span class="required-star">*</span></label
         >
         <input
           pInputText
-          id="username"
-          placeholder="Username"
-          aria-describedby="username-help"
+          id="firstName"
+          placeholder="First Name"
+          aria-describedby="firstName-help"
           formControlName="firstName"
         />
         <small
@@ -73,26 +73,26 @@
       </div>
 
       <div class="d-flex flex-column gap-5">
-        <label for="username" class="field-label">Middle Name</label>
+        <label for="middleName" class="field-label">Middle Name</label>
         <input
           pInputText
-          id="username"
-          placeholder="Username"
-          aria-describedby="username-help"
+          id="middleName"
+          placeholder="Middle Name"
+          aria-describedby="middleName-help"
           formControlName="middleName"
         />
         <!-- <small id="username-help">Enter your username to reset your password.</small> -->
       </div>
 
       <div class="d-flex flex-column gap-5">
-        <label for="username" class="field-label required"
+        <label for="lastName" class="field-label required"
           >Last Name<span class="required-star">*</span></label
         >
         <input
           pInputText
-          id="username"
-          placeholder="Username"
-          aria-describedby="username-help"
+          id="lastName"
+          placeholder="Last Name"
+          aria-describedby="lastName-help"
           formControlName="lastName"
         />
         <small
@@ -106,7 +106,7 @@
     </div>
 
     <div class="d-flex flex-column gap-5 w-100">
-      <label for="username" class="field-label">Email</label>
+      <label for="email" class="field-label">Email</label>
       <p-iconfield>
         <p-inputicon>
           <svg
@@ -125,7 +125,8 @@
         <input
           pInputText
           formControlName="email"
-          placeholder="Large"
+          placeholder="Email"
+          aria-describedby="email-help"
           pSize="large"
         />
         <!-- <p-inputicon class="pi pi-spin pi-spinner" /> -->
@@ -137,7 +138,7 @@
     </div>
 
     <div class="d-flex flex-column gap-5 w-100">
-      <label for="username" class="field-label">Phone</label>
+      <label for="phone" class="field-label">Phone</label>
       <p-iconfield>
         <p-inputIcon>
           <svg
@@ -180,7 +181,7 @@
     </div>
 
     <div class="d-flex flex-column gap-5 w-100">
-      <label for="username" class="field-label required"
+      <label for="role" class="field-label required"
         >Role<span class="required-star">*</span></label
       >
       <p-select
@@ -197,7 +198,7 @@
     </div>
 
     <div class="d-flex flex-column gap-5 w-100">
-      <label for="username" class="field-label required"
+      <label for="department" class="field-label required"
         >Department<span class="required-star">*</span></label
       >
       <p-select
