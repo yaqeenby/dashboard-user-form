@@ -15,7 +15,6 @@ export class ActiveRouteGuard implements CanMatch {
   ): boolean | Observable<boolean> | Promise<boolean> {
     if (route.data && route.data['activeRoute']) {
       this.activeRoutingService.setActiveRoute(route.data['activeRoute']);
-      console.log('Set active route data:', route.data);
     }
     return true;
   }

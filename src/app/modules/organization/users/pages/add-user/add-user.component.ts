@@ -48,7 +48,6 @@ export class AddUserComponent implements OnInit, OnDestroy {
       .get('enableRfid')
       ?.valueChanges.pipe(takeUntil(this.destroy$))
       .subscribe((v) => {
-        console.log(v);
         if (v) this.userForm.get('rfid')?.enable();
         else this.userForm.get('rfid')?.disable();
       });
@@ -78,7 +77,6 @@ export class AddUserComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    console.log(this.userForm);
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
       return;
@@ -91,7 +89,6 @@ export class AddUserComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.messageService.add({
             severity: 'success',
             summary: 'Success',

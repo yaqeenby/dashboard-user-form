@@ -26,7 +26,6 @@ export class SidebarMenuItemComponent {
   ) {}
 
   onClickItem(event: Event, item: MenuItem) {
-    console.log(item);
     if (item.command) {
       item.command({ originalEvent: event, item });
     }

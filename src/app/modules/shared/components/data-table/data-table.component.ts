@@ -56,7 +56,6 @@ export class DataTableComponent implements OnInit {
     }
   }
   export() {
-    console.log(this.dt);
     this.dt.exportCSV();
   }
 
