@@ -23,7 +23,7 @@
       <app-shifts-history
         [shift]="shift"
         [showSearchAndActions]="!!first"
-        stateKey="shift-history-one"
+        [stateKey]="'shift-history-' + shift.id"
         [searchControl]="searchControl"
         [preventDefaultExport]="true"
         (onExportData)="exportMultipleShifts()"
