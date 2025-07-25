@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DashbordService } from './services/dashboard.service';
-import { Shift } from '../../types/shift.type';
-import { error } from 'console';
 import { KPIs, KPIvalue } from './types/kpi.type';
 import { FormControl } from '@angular/forms';
+import * as Papa from 'papaparse';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -13,8 +12,9 @@ import {
   switchMap,
   takeUntil,
 } from 'rxjs';
-import { LoadingService } from '../../services/loading.service';
 import { MessageService } from 'primeng/api';
+import { Shift } from './types/shift.type';
+import { TripExportedData } from './types/trip-exported-data.type';
 
 @Component({
   selector: 'app-dashboard',
@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getFilteredShifts(searchText: string = ''): Observable<any[]> {
     return this.dashbordService
-      .getShifts()
+      .getShifts(false)
       .pipe(map((shifts) => this.filterShifts(shifts, searchText)));
   }
 
@@ -108,6 +108,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.KPIsElements = [];
           for (let [key, value] of Object.entries(this.KPIs)) {
             value.opacity = this.getOpacity(i);
+            value.id = key;
             this.KPIsElements.push(value);
             i++;
           }
@@ -142,5 +143,29 @@ export class DashboardComponent implements OnInit, OnDestroy {
   reloadShifts() {
     this.searchControl.reset();
     this.loadShifts();
+  }
+
+  exportMultipleShifts() {
+    const allTrips = this.shifts.flatMap((shift) =>
+      shift.trips.map((trip) => {
+        let exportedTrip: TripExportedData = new TripExportedData(trip, shift);
+        return exportedTrip;
+      })
+    );
+
+    let combinedCsv = Papa.unparse(allTrips as any);
+
+    const blob = new Blob([combinedCsv], { type: 'text/csv;charset=utf-8;' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'shifts.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  trackByFn(index: number, item: any): any {
+    return item.id;
   }
 }

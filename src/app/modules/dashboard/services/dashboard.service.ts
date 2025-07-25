@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MockApiService } from '../../../core/api/mock-api';
 import { KPIs } from '../types/kpi.type';
-import { Shift } from '../../../types/shift.type';
+import { Shift } from '../types/shift.type';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,8 @@ import { Shift } from '../../../types/shift.type';
 export class DashbordService {
   constructor(private mockApiService: MockApiService) {}
 
-  getShifts(): Observable<Array<Shift>> {
-    return this.mockApiService.get<Array<Shift>>('/shifts');
+  getShifts(loader: boolean = true): Observable<Array<Shift>> {
+    return this.mockApiService.get<Array<Shift>>('/shifts', loader);
   }
 
   getKPIs(): Observable<KPIs> {

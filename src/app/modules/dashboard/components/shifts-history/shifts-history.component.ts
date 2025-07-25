@@ -7,13 +7,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Table } from 'primeng/table';
-import { Shift } from '../../../../types/shift.type';
 import { FormControl } from '@angular/forms';
 import { TableColumn } from '../../../shared/types/table-column.type';
 import * as Papa from 'papaparse';
 import { catchError, finalize, from, mergeMap, of, tap } from 'rxjs';
 import { DashbordService } from '../../services/dashboard.service';
 import { MessageService } from 'primeng/api';
+import { Shift } from '../../types/shift.type';
+import { TripExportedData } from '../../types/trip-exported-data.type';
 
 @Component({
   selector: 'app-shifts-history',
@@ -27,6 +28,7 @@ export class ShiftsHistoryComponent implements OnInit {
   @Input() showSearchAndActions: boolean = false;
   @Input() stateKey: string = '';
   @Input() searchControl!: FormControl;
+  @Input() preventDefaultExport: boolean = false;
 
   columns: TableColumn[] = [
     { field: 'vehicle', header: 'Vehicle', sortable: true, visible: true },
@@ -63,8 +65,9 @@ export class ShiftsHistoryComponent implements OnInit {
   selectedColumns: TableColumn[] = [];
   maxShiftsAllowed = 5;
 
-  @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
-  @Output() onExportData: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() onImportData: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() onExportData: EventEmitter<Shift | null> =
+    new EventEmitter<Shift | null>();
 
   constructor(
     private dashbordService: DashbordService,
@@ -109,7 +112,11 @@ export class ShiftsHistoryComponent implements OnInit {
   }
 
   export() {
-    this.dt.exportCSV();
+    if (!this.preventDefaultExport) {
+      this.dt.exportCSV();
+    }
+
+    this.onExportData.emit(this.shift);
   }
 
   onColReorder(event: any) {
@@ -150,34 +157,22 @@ export class ShiftsHistoryComponent implements OnInit {
     const shiftMap = new Map<string, any>();
 
     data.forEach((row) => {
-      const shiftId = row['shiftId'];
+      const shiftId = row.shiftId;
       if (!shiftMap.has(shiftId)) {
         shiftMap.set(shiftId, {
           id: shiftId,
-          name: row['shiftName'],
-          startDate: row['startDate'],
-          endDate: row['endDate'],
+          name: row.shiftName,
+          startDate: row.startDate,
+          endDate: row.endDate,
           trips: [],
         });
       }
 
-      shiftMap.get(shiftId).trips.push({
-        id: row['id'],
-        vehicle: row['vehicle'],
-        plateNum: row['plateNum'],
-        odometer: row['odometer'],
-        GPS: row['GPS'],
-        device: {
-          name: row['deviceName'],
-          serial: row['deviceSerial'],
-        },
-        SIM: {
-          name: row['SIMName'],
-          size: row['SIMSize'],
-        },
-        fleet: row['fleet'],
-        status: row['status'],
-      });
+      let trip: TripExportedData = Object.assign(
+        new TripExportedData(row, shiftMap.get(shiftId)),
+        row
+      );
+      shiftMap.get(shiftId).trips.push(trip.toTrip());
     });
 
     return Array.from(shiftMap.values());
@@ -209,7 +204,7 @@ export class ShiftsHistoryComponent implements OnInit {
             detail: 'All Shifts Added Successfully',
           });
 
-          this.onExportData.emit(true);
+          this.onImportData.emit(true);
         })
       )
       .subscribe();

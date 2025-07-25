@@ -1,6 +1,6 @@
 <div class="d-flex flex-column dashboard-gap">
   <div *ngIf="KPIs" class="cards-container">
-    <ng-container *ngFor="let elem of KPIsElements">
+    <ng-container *ngFor="let elem of KPIsElements; trackBy: trackByFn">
       <app-metric-card
         [title]="elem.label"
         [value]="elem.value"
@@ -13,14 +13,21 @@
 
   <div class="d-flex flex-column tables-container">
     <ng-container
-      *ngFor="let shift of shifts; let first = first; let last = last"
+      *ngFor="
+        let shift of shifts;
+        trackBy: trackByFn;
+        let first = first;
+        let last = last
+      "
     >
       <app-shifts-history
         [shift]="shift"
         [showSearchAndActions]="!!first"
         stateKey="shift-history-one"
         [searchControl]="searchControl"
-        (onExportData)="reloadShifts()"
+        [preventDefaultExport]="true"
+        (onExportData)="exportMultipleShifts()"
+        (onImportData)="reloadShifts()"
       ></app-shifts-history>
 
       <hr *ngIf="!last" class="divider" />

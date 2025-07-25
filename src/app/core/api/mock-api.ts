@@ -10,8 +10,10 @@ export class MockApiService {
 
   constructor(private http: HttpClient) {}
 
-  get<T>(endpoint: string): Observable<T> {
-    return this.http.get<T>(`${this.baseUrl}/${endpoint}`);
+  get<T>(endpoint: string, loader: boolean = true): Observable<T> {
+    return this.http.get<T>(`${this.baseUrl}/${endpoint}`, {
+      headers: { 'X-Show-Loader': `${loader}` },
+    });
   }
 
   post<T>(endpoint: string, data: any): Observable<T> {

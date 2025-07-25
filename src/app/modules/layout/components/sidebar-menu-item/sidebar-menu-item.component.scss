@@ -247,7 +247,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
-    height: 20px;
+    height: $space-20;
     background: rgb(255 255 255 / 30%);
     filter: blur(27px);
     z-index: -1;
