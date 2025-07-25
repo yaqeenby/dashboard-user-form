@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { Table } from 'primeng/table';
 import { Shift } from '../../types/shift.type';
 import { TableColumn } from '../../../shared/types/table-column.type';

@@ -1,20 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DashbordService } from './services/dashboard.service';
 import { KPIs, KPIvalue } from './types/kpi.type';
-import { FormControl } from '@angular/forms';
-import * as Papa from 'papaparse';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  map,
-  Observable,
-  Subject,
-  switchMap,
-  takeUntil,
-} from 'rxjs';
+import { Subject } from 'rxjs';
 import { MessageService } from 'primeng/api';
-import { Shift } from './types/shift.type';
-import { TripExportedData } from './types/trip-exported-data.type';
 
 @Component({
   selector: 'app-dashboard',
