@@ -44,11 +44,14 @@ export class AddUserComponent implements OnInit, OnDestroy {
       fleet: [''],
     });
 
-    this.userForm.get('enableRfid')?.valueChanges.subscribe((v) => {
-      console.log(v);
-      if (v) this.userForm.get('rfid')?.enable();
-      else this.userForm.get('rfid')?.disable();
-    });
+    this.userForm
+      .get('enableRfid')
+      ?.valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe((v) => {
+        console.log(v);
+        if (v) this.userForm.get('rfid')?.enable();
+        else this.userForm.get('rfid')?.disable();
+      });
   }
 
   ngOnDestroy(): void {
@@ -110,8 +113,8 @@ export class AddUserComponent implements OnInit, OnDestroy {
   }
 
   cancel() {
-    console.log('reset');
     this.previewUrl = null;
     this.userForm.reset();
+    this.router.navigate(['/organization/users/list']);
   }
 }
