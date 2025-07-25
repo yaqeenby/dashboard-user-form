@@ -399,6 +399,30 @@ body {
     width: 100%;
   }
 
+  .p-toggleswitch-handle {
+    width: $space-14;
+    height: $space-14;
+    top: 54%;
+    background: $primary-bg;
+  }
+
+  .p-toggleswitch.p-toggleswitch-checked .p-toggleswitch-slider {
+    background: $primary-tint;
+    .p-toggleswitch-handle {
+      background: $primary-bg;
+    }
+  }
+
+  .p-toggleswitch:not(.p-disabled):has(
+      .p-toggleswitch-input:hover
+    ).p-toggleswitch-checked
+    .p-toggleswitch-slider {
+    background: $primary-tint;
+    .p-toggleswitch-handle {
+      background: white;
+    }
+  }
+
   small {
     color: $Danger;
     font-size: $font-12;

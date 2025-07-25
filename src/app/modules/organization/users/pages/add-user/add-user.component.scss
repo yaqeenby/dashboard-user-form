@@ -47,7 +47,7 @@
 
 .user-fullname {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
   align-items: start;
 }
 
@@ -55,10 +55,4 @@
   max-width: 653px;
   width: 100%;
   margin-top: $space-60;
-}
-
-@media (max-width: $screen-md) {
-  .user-fullname {
-    grid-template-columns: auto;
-  }
 }
