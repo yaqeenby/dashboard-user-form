@@ -12,6 +12,8 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { ErrorInterceptor } from './interceptors/error-interceptor';
+import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,9 +28,15 @@ export const appConfig: ApplicationConfig = {
       },
     }),
     provideHttpClient(withInterceptorsFromDi()),
+    MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     },
   ],

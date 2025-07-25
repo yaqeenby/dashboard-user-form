@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { UploadEvent } from 'primeng/fileupload';
-import { UsersService } from '../services/users.service';
-import { User } from '../types/user.type';
+import { UsersService } from '../../services/users.service';
+import { User } from '../../types/user.type';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 

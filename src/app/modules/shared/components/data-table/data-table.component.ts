@@ -23,7 +23,10 @@ export class DataTableComponent implements OnInit {
   @Input() dataKey: string = 'id';
   @Input() captionTemplate?: TemplateRef<any> | any;
   @Input() rowTemplate?: TemplateRef<any> | any;
-  @Input() showSearchAndActions: boolean = false;
+  @Input() showSearch: boolean = true;
+  @Input() showExport: boolean = true;
+  @Input() showImport: boolean = true;
+
   @Input() stateKey = 'generic-state-key';
 
   tableStyle = { 'min-width': '50rem' };

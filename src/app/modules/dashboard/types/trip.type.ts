@@ -1,4 +1,4 @@
-import { TripStatus } from '../../../enums/trip-status.enum';
+import { TripStatus } from '../enums/trip-status.enum';
 import { Device } from './device.type';
 import { SIM } from './SIM.type';
 

@@ -1,6 +1,6 @@
 <div class="d-flex flex-column gap-20 table">
-  <div class="d-flex gap-15" *ngIf="showSearchAndActions">
-    <p-iconfield iconPosition="left" class="flex-grow-1">
+  <div class="d-flex gap-15" *ngIf="showSearch || showExport || showImport">
+    <p-iconfield iconPosition="left" class="flex-grow-1" *ngIf="showSearch">
       <p-inputicon>
         <i class="pi pi-search"></i>
       </p-inputicon>
@@ -14,12 +14,14 @@
       <!-- [value]="dataTable.filters['global']?.value" -->
     </p-iconfield>
     <p-button
+      *ngIf="showExport"
       class="export-btn"
       icon="pi pi-download"
       label="Export"
       (click)="export()"
     />
     <p-fileUpload
+      *ngIf="showImport"
       class="import-btn"
       chooseIcon="pi pi-upload"
       mode="basic"

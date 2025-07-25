@@ -1,4 +1,4 @@
-import { TripStatus } from '../../../enums/trip-status.enum';
+import { TripStatus } from '../enums/trip-status.enum';
 import { Shift } from './shift.type';
 import { Trip } from './trip.type';
 

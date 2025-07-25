@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users.component';
-import { AddUserComponent } from './add-user/add-user.component';
+import { AddUserComponent } from './pages/add-user/add-user.component';
 import { ActiveRouteGuard } from '../../../guards/active-route.guard';
 import { ActiveRouting } from '../../../enums/active-routing.enum';
-import { UsersListComponent } from './users-list/users-list.component';
+import { UsersListComponent } from './pages/users-list/users-list.component';
 
 const routes: Routes = [
   {

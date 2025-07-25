@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { User } from '../types/user.type';
-import { UsersService } from '../services/users.service';
+import { User } from '../../types/user.type';
+import { UsersService } from '../../services/users.service';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
-import { TableColumn } from '../../../shared/types/table-column.type';
+import { TableColumn } from '../../../../shared/types/table-column.type';
 
 @Component({
   selector: 'app-users-list',
