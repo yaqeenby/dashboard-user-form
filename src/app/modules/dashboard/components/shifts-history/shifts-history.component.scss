@@ -1,15 +1,22 @@
 @use "variables" as *;
 
-.vehicle-tag {
-  border-radius: $space-6;
-  border: $space-1 solid $prim-shade-2;
-  padding: 0 $space-4;
-  color: $prim-shade-2;
-  font-size: $font-13;
-}
+.tables-container {
+  .divider {
+    border: none;
+    height: $space-1;
+    width: 100%;
+    background: #000;
+    margin: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      $borders,
+      $borders $space-4,
+      transparent $space-4,
+      transparent $space-12
+    );
+  }
 
-.bolt {
-  box-shadow: 0 0 $space-10 0 $success;
+  gap: $space-60;
 }
 
 ::ng-deep {

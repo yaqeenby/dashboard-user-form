@@ -1,16 +1,21 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import { Table } from 'primeng/table';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { TableColumn } from '../../../shared/types/table-column.type';
 import * as Papa from 'papaparse';
-import { catchError, finalize, from, mergeMap, of, tap } from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  finalize,
+  from,
+  map,
+  mergeMap,
+  Observable,
+  of,
+  Subject,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs';
 import { DashbordService } from '../../services/dashboard.service';
 import { MessageService } from 'primeng/api';
 import { Shift } from '../../types/shift.type';
@@ -22,52 +27,13 @@ import { TripExportedData } from '../../types/trip-exported-data.type';
   styleUrl: './shifts-history.component.scss',
   standalone: false,
 })
-export class ShiftsHistoryComponent implements OnInit {
-  @ViewChild('dataTable') dt!: Table;
-  @Input() shift: Shift | null = null;
-  @Input() showSearchAndActions: boolean = false;
-  @Input() stateKey: string = '';
-  @Input() searchControl!: FormControl;
-  @Input() preventDefaultExport: boolean = false;
+export class ShiftsHistoryComponent implements OnInit, OnDestroy {
+  shifts: Shift[] = [];
+  searchControl = new FormControl();
 
-  columns: TableColumn[] = [
-    { field: 'vehicle', header: 'Vehicle', sortable: true, visible: true },
-    { field: 'plateNum', header: 'PlateNum', sortable: true, visible: true },
-    { field: 'odometer', header: 'Odometer', visible: true },
-    { field: 'GPS', header: 'GPS', visible: true },
-    { field: 'device', header: 'Device', visible: true },
-    { field: 'SIM', header: 'SIM', visible: true },
-    { field: 'fleet', header: 'Fleet', visible: true },
-    { field: 'status', header: 'Status', visible: true },
-  ];
-
-  globalFilterFields = ['vehicle', 'plateNum'];
-
-  items = [
-    {
-      label: 'Options',
-      items: [
-        {
-          label: 'Refresh',
-          icon: 'pi pi-refresh',
-        },
-        {
-          label: 'Export',
-          icon: 'pi pi-upload',
-        },
-      ],
-    },
-  ];
-
-  tableStyle = { 'min-width': '50rem' };
-  dataKey: string = 'id';
-
-  selectedColumns: TableColumn[] = [];
   maxShiftsAllowed = 5;
 
-  @Output() onImportData: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() onExportData: EventEmitter<Shift | null> =
-    new EventEmitter<Shift | null>();
+  private destroy$ = new Subject<void>();
 
   constructor(
     private dashbordService: DashbordService,
@@ -75,52 +41,71 @@ export class ShiftsHistoryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.stateKey && localStorage) {
-      const savedState = localStorage.getItem(this.stateKey);
-      if (savedState) {
-        const parsed = JSON.parse(savedState);
-        const colOrder = parsed?.columnOrder;
+    this.loadShifts();
 
-        if (colOrder?.length) {
-          this.selectedColumns = colOrder
-            .map((colField: string) =>
-              this.columns.find((c) => c.field === colField)
-            )
-            .filter(Boolean);
-        } else {
-          this.selectedColumns = [...this.columns];
-        }
-      } else {
-        this.selectedColumns = [...this.columns];
+    this.searchControl.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap((searchText: string) => this.getFilteredShifts(searchText)),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((filtered) => {
+        this.shifts = filtered as Shift[];
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  loadShifts() {
+    this.getFilteredShifts().subscribe(
+      (res: Shift[]) => {
+        this.shifts = res;
+      },
+      (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Something Went Wrong',
+        });
       }
-    }
+    );
   }
 
-  getSeverity(status: number) {
-    switch (status) {
-      case 1:
-        return 'Accepted';
-
-      case 2:
-        return 'Active';
-
-      case 3:
-        return 'Completed';
-    }
-
-    return 'Pending';
+  getFilteredShifts(searchText: string = ''): Observable<any[]> {
+    return this.dashbordService
+      .getShifts(false)
+      .pipe(map((shifts) => this.filterShifts(shifts, searchText)));
   }
 
-  export() {
-    if (!this.preventDefaultExport) {
-      this.dt.exportCSV();
+  filterShifts(shifts: Shift[], search: string): any[] {
+    if (!search) return shifts;
+    const lower = search.toLowerCase();
+
+    for (let sh of shifts) {
+      sh.trips = sh.trips.filter(
+        (trip) =>
+          trip.vehicle.toLocaleLowerCase().includes(lower) ||
+          trip.plateNum.toLocaleLowerCase().includes(lower) ||
+          trip.odometer.toLocaleLowerCase().includes(lower) ||
+          trip.GPS.toLocaleLowerCase().includes(lower) ||
+          trip.status.toLocaleLowerCase().includes(lower) ||
+          trip.fleet.toLocaleLowerCase().includes(lower) ||
+          trip.device?.name?.toLocaleLowerCase().includes(lower) ||
+          trip.device?.serial?.toLocaleLowerCase().includes(lower) ||
+          trip.SIM?.name?.toLocaleLowerCase().includes(lower)
+      );
     }
 
-    this.onExportData.emit(this.shift);
+    return shifts;
   }
 
-  onColReorder(event: any) {
-    this.selectedColumns = [...event.columns];
+  reloadShifts() {
+    this.searchControl.reset();
+    this.loadShifts();
   }
 
   onCSVImport(event: any): void {
@@ -204,9 +189,33 @@ export class ShiftsHistoryComponent implements OnInit {
             detail: 'All Shifts Added Successfully',
           });
 
-          this.onImportData.emit(true);
+          this.reloadShifts();
         })
       )
       .subscribe();
+  }
+
+  exportMultipleShifts() {
+    const allTrips = this.shifts.flatMap((shift) =>
+      shift.trips.map((trip) => {
+        let exportedTrip: TripExportedData = new TripExportedData(trip, shift);
+        return exportedTrip;
+      })
+    );
+
+    let combinedCsv = Papa.unparse(allTrips as any);
+
+    const blob = new Blob([combinedCsv], { type: 'text/csv;charset=utf-8;' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'shifts.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  trackByFn(index: number, item: any): any {
+    return item.id;
   }
 }

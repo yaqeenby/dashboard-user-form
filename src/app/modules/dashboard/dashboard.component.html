@@ -11,26 +11,5 @@
     </ng-container>
   </div>
 
-  <div class="d-flex flex-column tables-container">
-    <ng-container
-      *ngFor="
-        let shift of shifts;
-        trackBy: trackByFn;
-        let first = first;
-        let last = last
-      "
-    >
-      <app-shifts-history
-        [shift]="shift"
-        [showSearchAndActions]="!!first"
-        [stateKey]="'shift-history-' + shift.id"
-        [searchControl]="searchControl"
-        [preventDefaultExport]="true"
-        (onExportData)="exportMultipleShifts()"
-        (onImportData)="reloadShifts()"
-      ></app-shifts-history>
-
-      <hr *ngIf="!last" class="divider" />
-    </ng-container>
-  </div>
+  <app-shifts-history></app-shifts-history>
 </div>

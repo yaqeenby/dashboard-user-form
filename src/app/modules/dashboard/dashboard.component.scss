@@ -7,25 +7,6 @@
   gap: $space-10;
 }
 
-.tables-container {
-  .divider {
-    border: none;
-    height: $space-1;
-    width: 100%;
-    background: #000;
-    margin: 0;
-    background: repeating-linear-gradient(
-      90deg,
-      $borders,
-      $borders $space-4,
-      transparent $space-4,
-      transparent $space-12
-    );
-  }
-
-  gap: $space-60;
-}
-
 .dashboard-gap {
   gap: $space-30;
 }
