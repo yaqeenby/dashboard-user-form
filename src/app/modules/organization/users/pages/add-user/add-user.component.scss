@@ -29,6 +29,13 @@
       color: $text-prim !important;
       font-size: $font-14;
       box-shadow: 0 $space-1 $space-1 0 #02001799;
+
+      &:hover,
+      &:active {
+        background-color: $Com-success-2;
+        border-color: $Com-success-2;
+        color: black !important;
+      }
     }
 
     .p-button .pi {
