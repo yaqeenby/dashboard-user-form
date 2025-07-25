@@ -37,7 +37,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
       lastName: ['', Validators.required],
       email: ['', Validators.email],
       phone: [''],
-      enableRfid: [false],
+      enableRfid: [true],
       rfid: [''],
       role: [null, Validators.required],
       department: [null, Validators.required],
