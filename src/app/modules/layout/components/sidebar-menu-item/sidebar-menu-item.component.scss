@@ -232,13 +232,18 @@
   padding: $space-12 0;
   width: 261px;
   color: white;
-  transform: translateX(30%);
   z-index: 5;
   box-shadow: $space-6 0 $space-10 0 rgba(0, 0, 0, 0.2);
   border: $space-1 solid $borders;
   border-top: 0;
-  left: 15%;
+  left: 96%;
   overflow: hidden;
+
+  opacity: 0;
+  transform: scaleX(0.6);
+  transform-origin: left;
+  white-space: nowrap;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 
   &::after {
     content: "";
@@ -252,5 +257,10 @@
     filter: blur(27px);
     z-index: -1;
     pointer-events: none;
+  }
+
+  &.expanded {
+    opacity: 1;
+    transform: scaleX(1);
   }
 }

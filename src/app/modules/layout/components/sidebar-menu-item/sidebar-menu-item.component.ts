@@ -13,6 +13,7 @@ export class SidebarMenuItemComponent {
   @Input() item: MenuItem | undefined;
   @Input() selected: boolean = false;
   expandedItemId: string | null = null;
+  showMenu: boolean = false;
 
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent) {
@@ -40,6 +41,14 @@ export class SidebarMenuItemComponent {
       this.item?.items.length
     ) {
       this.expandedItemId = this.expandedItemId === item.id ? null : item.id;
+
+      if (this.expandedItemId) {
+        setTimeout(() => {
+          this.showMenu = true;
+        }, 100);
+      } else {
+        this.showMenu = false;
+      }
     }
   }
 
