@@ -1,5 +1,5 @@
-<div class="d-flex flex-column dashboard-gap">
-  <div *ngIf="KPIs" class="cards-container">
+<div class="d-flex flex-column dashboard-gap" *ngIf="!loadingKPIs">
+  <div class="cards-container">
     <ng-container *ngFor="let elem of KPIsElements; trackBy: trackByFn">
       <app-metric-card
         [title]="elem.label"

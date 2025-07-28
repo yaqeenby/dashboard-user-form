@@ -13,6 +13,7 @@ import { MessageService } from 'primeng/api';
 export class DashboardComponent implements OnInit, OnDestroy {
   KPIs: KPIs | null = null;
   KPIsElements: KPIvalue[] = [];
+  loadingKPIs: boolean = false;
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -30,6 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   loadKPIs() {
+    this.loadingKPIs = true;
     this.dashbordService.getKPIs().subscribe(
       (res) => {
         this.KPIs = res as KPIs;
@@ -44,6 +46,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             i++;
           }
         }
+        this.loadingKPIs = false;
       },
       (error) => {
         this.messageService.add({
@@ -51,6 +54,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           summary: 'Error',
           detail: 'Something Went Wrong',
         });
+        this.loadingKPIs = false;
       }
     );
   }

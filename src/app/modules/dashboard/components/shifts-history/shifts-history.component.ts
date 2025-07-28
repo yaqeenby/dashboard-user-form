@@ -61,7 +61,7 @@ export class ShiftsHistoryComponent implements OnInit, OnDestroy {
   }
 
   loadShifts() {
-    this.getFilteredShifts().subscribe(
+    this.dashbordService.getShifts().subscribe(
       (res: Shift[]) => {
         this.shifts = res;
       },
