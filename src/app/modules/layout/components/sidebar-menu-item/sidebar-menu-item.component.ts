@@ -19,6 +19,7 @@ export class SidebarMenuItemComponent {
   onClickOutside(event: MouseEvent) {
     if (!this.eRef.nativeElement.contains(event.target)) {
       this.expandedItemId = null;
+      this.showMenu = false;
     }
   }
   constructor(

@@ -47,7 +47,11 @@
 </div>
 
 <!-- Submenu under expanded area -->
-<div *ngIf="item?.items" [class.expanded]="showMenu" class="menu-content">
+<div
+  *ngIf="item?.items && isExpanded(item)"
+  [class.expanded]="showMenu"
+  class="menu-content"
+>
   <app-sidebar-menu-item
     *ngFor="let sub of item?.items!"
     (click)="navigate(sub)"
